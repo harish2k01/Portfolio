@@ -37,13 +37,13 @@ const IndexPage = () => (
             </span>
           </h1>
           <div className="button-group">
+          <button className="button" onClick={linkedinPage}>
+              <FaLinkedin className="button-icon" />
+              <span>LinkedIn</span>
+            </button>
             <button className="button" onClick={githubPage}>
               <FaGithub className="button-icon" />
               <span>GitHub</span>
-            </button>
-            <button className="button" onClick={linkedinPage}>
-              <FaLinkedin className="button-icon" />
-              <span>LinkedIn</span>
             </button>
             <button className="button" onClick={mediumPage}>
               <FaMedium className="button-icon" />
