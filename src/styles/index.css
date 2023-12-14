@@ -1,0 +1,40 @@
+.status-container {
+    display: flex;
+    align-items: center;
+    color: white;
+}
+
+.green-circle {
+    width: 8px;
+    height: 8px;
+    background-color: lightgreen;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    @apply bg-gray-900 text-white py-2 px-4 rounded-full mt-9 transition-all duration-300;
+    &:hover {
+        @apply bg-white text-gray-900 transform scale-105;
+    }
+}
+
+.button-icon {
+    @apply mr-2; /* Adjust margin as needed */
+}
+
+.heading {
+    @apply text-2xl font-semibold;
+}
+
+.line {
+    @apply my-5 opacity-30;
+}
+
+.button-group {
+    display: flex
+}
