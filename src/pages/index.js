@@ -3,7 +3,7 @@ import Layout from "../components/layout"
 import Seo from "../components/seo"
 import "../styles/global.css"
 import "../styles/index.css"
-import { FaEnvelope, FaGithub, FaLinkedin, FaMedium, FaRegEnvelope } from "react-icons/fa6"
+import { FaGithub, FaLinkedin, FaMedium } from "react-icons/fa6"
 
 const githubPage = () => {
   window.open("https://github.com/harish2k01", "_blank")
@@ -16,12 +16,6 @@ const linkedinPage = () => {
 const mediumPage = () => {
   window.open("https://harish2k01.medium.com/", "_blank")
 }
-
-const sendEmail = () => {
-  const emailAddress = 't.harish2478@gmail.com';
-  const mailtoLink = `mailto:${emailAddress}`;
-  window.location.href = mailtoLink;
-};
 
 const IndexPage = () => (
   <Layout>
