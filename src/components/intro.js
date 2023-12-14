@@ -16,49 +16,45 @@ const Intro = () => {
   }
 
   return (
-    <div>
+    <>
       <div className="status-container">
         <div className="green-circle"></div>
         <span>Online</span>
       </div>
-      <section className="mx-auto max-w-lg px-12 sm:px-0">
-        <article className="text-slate-200 slide-in-bottom">
-          <h1 className="text-4xl sm:text-5xl font-semibold mt-5 tracking-wider">
-            Hi, I'm{" "}
-            <span class="marker">
-              Harish<span className="name-line"></span>
-            </span>
-            <br />
-            <span
-              className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 mt-2 block"
-              style={{ paddingBottom: "3px" }}
-            >
-              Software Engineer
-            </span>
-          </h1>
-          <div className="button-group">
-            <button className="button" onClick={linkedinPage}>
-              <FaLinkedin className="button-icon" />
-              <span>LinkedIn</span>
-            </button>
-            <button className="button" onClick={githubPage}>
-              <FaGithub className="button-icon" />
-              <span>GitHub</span>
-            </button>
-            <button className="button" onClick={mediumPage}>
-              <FaMedium className="button-icon" />
-              <span>Medium</span>
-            </button>
-          </div>
-          <p className="text-gray-400 text-lg tracking-wide mt-9">
-            Hey, I am Harish, Software Engineer from Madurai, with 1.5 years of
-            expertise in Automation and Performance Tests. A Tech Explorer who
-            is currently into Home Lab!
-          </p>
-          <hr className="line" />
-        </article>
-      </section>
-    </div>
+      <h1 className="text-4xl sm:text-5xl font-semibold mt-5 tracking-wider">
+        Hi, I'm{" "}
+        <span class="marker">
+          Harish<span className="name-line"></span>
+        </span>
+        <br />
+        <span
+          className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 mt-2 block"
+          style={{ paddingBottom: "3px" }}
+        >
+          Software Engineer
+        </span>
+      </h1>
+      <div className="button-group">
+        <button className="button" onClick={linkedinPage}>
+          <FaLinkedin className="button-icon" />
+          <span>LinkedIn</span>
+        </button>
+        <button className="button" onClick={githubPage}>
+          <FaGithub className="button-icon" />
+          <span>GitHub</span>
+        </button>
+        <button className="button" onClick={mediumPage}>
+          <FaMedium className="button-icon" />
+          <span>Medium</span>
+        </button>
+      </div>
+      <p className="text-gray-400 text-lg tracking-wide mt-9">
+        Hey, I am Harish, Software Engineer from Madurai, with 1.5 years of
+        expertise in Automation and Performance Tests. A Tech Explorer who is
+        currently into Home Lab!
+      </p>
+      <hr className="line" />
+    </>
   )
 }
 

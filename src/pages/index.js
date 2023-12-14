@@ -6,12 +6,12 @@ import Intro from "../components/intro"
 
 const IndexPage = () => {
   return (
-    <Layout>
-      <div>
+    <>
+      <Layout>
         <Intro />
         <h2 className="heading">My Timeline</h2>
-      </div>
-    </Layout>
+      </Layout>
+    </>
   )
 }
 
