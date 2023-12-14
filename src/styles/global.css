@@ -1,10 +1,28 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,100;9..40,200;9..40,300;9..40,400;9..40,500;9..40,600;9..40,700;9..40,800;9..40,900;9..40,1000&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,100;9..40,200;9..40,300;9..40,400;9..40,500;9..40,600;9..40,700;9..40,800;9..40,900;9..40,1000&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
-    font-family: 'DM Sans', sans-serif;
-    background-color: #0b0b0b!important;
+  font-family: "DM Sans", sans-serif;
+  background-color: #0b0b0b !important;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+  @apply bg-gray-900 text-white py-2 px-4 rounded-full mt-9 transition-all duration-300;
+  &:hover {
+    @apply bg-white text-gray-900 transform scale-105;
+  }
+  &:active {
+    @apply transform scale-95;
+  }
+}
+
+.button-icon {
+  @apply mr-2;
 }
