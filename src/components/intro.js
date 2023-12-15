@@ -22,10 +22,7 @@ const Intro = () => {
         <span>Online</span>
       </div>
       <h1 className="text-4xl sm:text-5xl font-semibold mt-5 tracking-wider">
-        Hi, I'm{" "}
-        <span class="marker">
-          Harish<span className="name-line"></span>
-        </span>
+        Hi, I'm Harish
         <br />
         <span
           className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 mt-2 block"

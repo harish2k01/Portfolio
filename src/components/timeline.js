@@ -5,56 +5,72 @@ const Timeline = () => {
   return (
     <>
       <h2 className="heading">My Timeline</h2>
-      <div class="timeline-main">
-        <div class="timeline">
+      <div className="timeline-main">
+        <div className="timeline">
           <ul>
             <li>
-              <div class="timeline-content">
-                <h3 class="date">20th may, 2010</h3>
-                <h1>Heading 1</h1>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Consectetur tempora ab laudantium voluptatibus aut eos placeat
-                  laborum, quibusdam exercitationem labore.
+              <div className="timeline-content-left">
+                <span className="date">01-Apr-2016</span>
+                <p className="text-content">
+                  Completed 10th, ICSE{" "}
+                  <span className="text-gray-400">@Vikaasa School</span>
                 </p>
               </div>
             </li>
             <li>
-              <div class="timeline-content">
-                <h3 class="date">20th may, 2010</h3>
-                <h1>Heading 2</h1>
+              <div className="timeline-content-right">
+                <span className="date">01-Apr-2018</span>
                 <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Consectetur tempora ab laudantium voluptatibus aut eos placeat
-                  laborum, quibusdam exercitationem labore.
+                  Completed 12th, ISC
+                  <br />
+                  <span className="text-gray-400">@Vikaasa School</span>
                 </p>
               </div>
             </li>
             <li>
-              <div class="timeline-content">
-                <h3 class="date">20th may, 2010</h3>
-                <h1>Heading 3</h1>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Consectetur tempora ab laudantium voluptatibus aut eos placeat
-                  laborum, quibusdam exercitationem labore.
+              <div className="timeline-content-left">
+                <span className="date">18-Oct-2021</span>
+                <p className="text-content">
+                  Joined <span className="text-gray-400">@Vuram</span>
+                  <br />
+                  as an Intern
                 </p>
               </div>
             </li>
             <li>
-              <div class="timeline-content">
-                <h3 class="date">20th may, 2010</h3>
-                <h1>Heading 4</h1>
+              <div className="timeline-content-right">
+                <span className="date">01-May-2022</span>
                 <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Consectetur tempora ab laudantium voluptatibus aut eos placeat
-                  laborum, quibusdam exercitationem labore.
+                  Graduated BE
+                  <br />
+                  in CSE <span className="text-gray-400">@VCET</span>
+                </p>
+              </div>
+            </li>
+            <li>
+              <div className="timeline-content-left">
+                <span className="date">01-Jul-2022</span>
+                <p className="text-content">
+                  Continued as an
+                  <br />
+                  Intern with <span className="text-gray-400">@Workhall</span>
+                </p>
+              </div>
+            </li>
+            <li>
+              <div className="timeline-content-right">
+                <span className="date">01-Aug-2022</span>
+                <p>
+                  Moved to Full Time{" "}
+                  <span className="text-gray-400">@Workhall</span> as Associate
+                  Software Engineer
                 </p>
               </div>
             </li>
           </ul>
         </div>
       </div>
+      <hr className="line" style={{ marginTop: "2.5rem" }} />
     </>
   )
 }
