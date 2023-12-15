@@ -12,10 +12,6 @@
   margin-right: 10px;
 }
 
-.line {
-  @apply my-5 opacity-30;
-}
-
 .button-group {
   display: flex;
 }

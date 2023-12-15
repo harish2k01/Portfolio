@@ -1,0 +1,110 @@
+.heading {
+  @apply text-2xl font-semibold text-white;
+}
+
+.timeline-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5rem;
+}
+
+.timeline {
+  width: 88%;
+  position: relative;
+}
+
+.timeline ul {
+  list-style: none;
+}
+
+.timeline ul li {
+  color: white;
+  margin-bottom: 30px;
+}
+
+.timeline ul li:last-child {
+  margin-bottom: -10px;
+}
+
+.timeline-content-left {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  justify-content: center;
+  position: relative;
+  top: -10px;
+  @apply text-gray-200;
+}
+
+.timeline-content-right {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  position: relative;
+  top: -10px;
+  @apply text-gray-200;
+}
+
+.text-content {
+  text-align: end;
+}
+
+.timeline:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 85%;
+  @apply bg-neutral-300;
+}
+
+.timeline ul li {
+  width: 50%;
+}
+
+.timeline ul li:nth-child(odd) {
+  clear: right;
+  transform: translateX(-30px);
+}
+
+.timeline ul li:nth-child(even) {
+  float: right;
+  transform: translateX(30px);
+}
+
+.timeline ul li::before {
+  content: "";
+  position: absolute;
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  @apply bg-neutral-300;
+  top: 0px;
+}
+
+.timeline ul li::before:last-child {
+  @apply bg-green-500;
+}
+
+.timeline ul li:nth-child(odd)::before {
+  transform: translate(50%, -50%);
+  right: -30px;
+}
+
+.timeline ul li:nth-child(even)::before {
+  transform: translate(-50%, -50%);
+  left: -30px;
+}
+
+.date {
+  margin-bottom: 10px;
+}
+
+span,
+p {
+  @apply tracking-wide;
+}

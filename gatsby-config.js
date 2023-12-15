@@ -12,7 +12,7 @@ module.exports = {
     title: `Portfolio`,
     description: `Harish's Portfolio`,
     author: `@harish`,
-    siteUrl: `https://dev.harish2k01.in/`,
+    siteUrl: `https://harish2k01.xyz/`,
   },
   plugins: [
     `gatsby-plugin-image`,
