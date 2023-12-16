@@ -3,6 +3,7 @@ import Layout from "../components/layout"
 import Seo from "../components/seo"
 import Intro from "../components/intro"
 import Timeline from "../components/timeline"
+import Blog from "../components/blog"
 
 const IndexPage = () => {
   return (
@@ -10,6 +11,7 @@ const IndexPage = () => {
       <Layout>
         <Intro />
         <Timeline />
+        <Blog />
       </Layout>
     </>
   )
