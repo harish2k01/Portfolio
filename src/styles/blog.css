@@ -1,0 +1,33 @@
+.card {
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.3s;
+  @apply bg-gray-900 text-white;
+  &:hover {
+    cursor: pointer;
+    @apply transform scale-105;
+  }
+  &:active {
+    @apply transform scale-100;
+  }
+}
+
+.image {
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.card-head {
+  @apply text-lg;
+  padding-bottom: 1rem;
+}
+
+.card-content {
+  @apply tracking-wide;
+  padding: 1rem;
+}
