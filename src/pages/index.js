@@ -4,6 +4,7 @@ import Seo from "../components/seo"
 import Intro from "../components/intro"
 import Timeline from "../components/timeline"
 import Blog from "../components/blog"
+import Skills from "../components/skills"
 
 const IndexPage = () => {
   return (
@@ -12,6 +13,7 @@ const IndexPage = () => {
         <Intro />
         <Timeline />
         <Blog />
+        <Skills />
       </Layout>
     </>
   )
