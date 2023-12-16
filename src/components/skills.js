@@ -11,7 +11,7 @@ import { SiGrafana, SiTailwindcss } from "react-icons/si"
 import { RiGatsbyFill } from "react-icons/ri"
 import { TbApi, TbSettingsAutomation } from "react-icons/tb"
 import { IoLogoJavascript } from "react-icons/io5"
-import { FaGitAlt, FaNode } from "react-icons/fa"
+import { FaNode } from "react-icons/fa"
 
 const Skills = () => {
   return (
