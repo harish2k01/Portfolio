@@ -62,6 +62,12 @@
   @apply bg-neutral-300;
 }
 
+@media (max-width: 520px) {
+  .timeline::before {
+    height: 83%;
+  }
+}
+
 .timeline ul li {
   width: 50%;
 }

@@ -12,7 +12,7 @@ const Layout = ({ children }) => {
       >
         <div
           className="flex items-center justify-center"
-          style={{ margin: "50px", padding: "50px" }}
+          style={{ marginTop: "50px", marginBottom: "50px", padding: "50px" }}
         >
           <section className="mx-auto max-w-lg">
             <article className="text-slate-200 slide-in-bottom">
