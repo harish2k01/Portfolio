@@ -14,7 +14,7 @@ const Layout = ({ children }) => {
           className="flex items-center justify-center"
           style={{ margin: "50px", padding: "50px" }}
         >
-          <section className="mx-auto max-w-lg px-12 sm:px-0">
+          <section className="mx-auto max-w-lg">
             <article className="text-slate-200 slide-in-bottom">
               {children}
             </article>
