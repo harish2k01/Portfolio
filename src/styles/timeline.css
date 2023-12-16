@@ -57,7 +57,7 @@
   @apply bg-neutral-300;
 }
 
-@media (max-width: 520px) {
+@media (max-width: 521px) {
   .timeline::before {
     height: 83%;
   }
@@ -99,6 +99,12 @@
 .timeline ul li:nth-child(even)::before {
   transform: translate(-50%, -50%);
   left: -30px;
+}
+
+@media (min-width: 560px) {
+  .timeline ul li:nth-child(even)::before {
+    left: -31px;
+  }
 }
 
 .date {
