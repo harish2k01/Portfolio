@@ -6,3 +6,10 @@
 
 // You can delete this file if you're not using it
 import './src/styles/global.css'
+
+export const onInitialClientRender = () => {
+  document.querySelector('meta[name="viewport"]').setAttribute(
+    'content',
+    'width=device-width, initial-scale=0.7'
+  );
+};
