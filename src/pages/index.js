@@ -6,6 +6,7 @@ import Timeline from "../components/timeline"
 import Blog from "../components/blog"
 import Skills from "../components/skills"
 import Projects from "../components/projects"
+import Contact from "../components/contact"
 
 const IndexPage = () => {
   return (
@@ -16,6 +17,7 @@ const IndexPage = () => {
         <Blog />
         <Skills />
         <Projects />
+        <Contact />
       </Layout>
     </>
   )
