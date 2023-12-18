@@ -101,12 +101,6 @@
   left: -30px;
 }
 
-@media (min-width: 560px) {
-  .timeline ul li:nth-child(even)::before {
-    left: -31px;
-  }
-}
-
 .date {
   margin-bottom: 10px;
 }
