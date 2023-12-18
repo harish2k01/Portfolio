@@ -2,10 +2,10 @@ import React from "react"
 import "../styles/blog.css"
 import { StaticImage } from "gatsby-plugin-image"
 
-const Blog = () => {
+const Blog = ({ id }) => {
   return (
     <>
-      <h2 className="heading" style={{ marginBottom: "3rem" }}>
+      <h2 id={id} className="heading" style={{ marginBottom: "3rem" }}>
         Blog
       </h2>
       <div className="card">

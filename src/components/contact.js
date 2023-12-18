@@ -1,9 +1,9 @@
 import * as React from "react"
 
-const Contact = () => {
+const Contact = ({ id }) => {
   return (
     <>
-      <h2 className="heading" style={{ marginBottom: "2rem" }}>
+      <h2 id={id} className="heading" style={{ marginBottom: "2rem" }}>
         Contact Me
       </h2>
       <p className="tracking-wide">

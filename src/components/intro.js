@@ -2,7 +2,7 @@ import * as React from "react"
 import "../styles/intro.css"
 import { FaGithub, FaLinkedin, FaMedium } from "react-icons/fa6"
 
-const Intro = () => {
+const Intro = ({ id }) => {
   const linkedinPage = () => {
     window.open("https://www.linkedin.com/in/harish2k01/", "_blank")
   }
@@ -17,7 +17,7 @@ const Intro = () => {
 
   return (
     <>
-      <div className="status-container">
+      <div id={id} className="status-container">
         <div className="green-circle"></div>
         <span>Online</span>
       </div>

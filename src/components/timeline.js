@@ -1,10 +1,10 @@
 import * as React from "react"
 import "../styles/timeline.css"
 
-const Timeline = () => {
+const Timeline = ({ id }) => {
   return (
     <>
-      <h2 className="heading">My Timeline</h2>
+      <h2 id ={id} className="heading">My Timeline</h2>
       <div className="timeline-main">
         <div className="timeline">
           <ul>

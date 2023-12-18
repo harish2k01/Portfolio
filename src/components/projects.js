@@ -2,10 +2,10 @@ import * as React from "react"
 import "../styles/projects.css"
 import { FaArrowRight } from "react-icons/fa6"
 
-const Projects = () => {
+const Projects = ({ id }) => {
   return (
     <>
-      <h2 className="heading" style={{ marginBottom: "3rem" }}>
+      <h2 id={id} className="heading" style={{ marginBottom: "3rem" }}>
         Hobby Projects
       </h2>
       <div className="grid grid-cols-2 gap-4">
