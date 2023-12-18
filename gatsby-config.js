@@ -16,7 +16,7 @@ module.exports = {
   },
   plugins: [
     {
-      resolve: '@marcnuri/gatsby-plugin-umami',
+      resolve: 'gatsby-plugin-umami',
       options: {
         srcUrl: 'https://umami.harish2k01.xyz/script.js',
         websiteId: 'c546f16c-f651-4863-9c3d-21d295be8c7e',
