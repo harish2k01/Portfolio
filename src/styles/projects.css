@@ -1,0 +1,33 @@
+.projects-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: column;
+  height: 250px;
+  border-radius: 20px;
+  position: relative;
+  @apply bg-gray-900 text-white tracking-wide transition-all duration-300;
+  &:hover {
+    @apply transform scale-105;
+    cursor: pointer;
+  }
+  &:active {
+    @apply transform scale-100;
+  }
+}
+
+.project-card-head {
+  @apply tracking-wide text-lg;
+  padding-bottom: 1rem;
+}
+
+.project-card-content {
+  padding: 1rem;
+  text-align: center;
+}
+
+.project-img {
+  position: absolute;
+  top: 20px;
+  right: 15px;
+}

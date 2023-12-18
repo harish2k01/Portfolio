@@ -5,6 +5,7 @@ import Intro from "../components/intro"
 import Timeline from "../components/timeline"
 import Blog from "../components/blog"
 import Skills from "../components/skills"
+import Projects from "../components/projects"
 
 const IndexPage = () => {
   return (
@@ -14,6 +15,7 @@ const IndexPage = () => {
         <Timeline />
         <Blog />
         <Skills />
+        <Projects />
       </Layout>
     </>
   )
