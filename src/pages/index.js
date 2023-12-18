@@ -7,6 +7,7 @@ import Blog from "../components/blog"
 import Skills from "../components/skills"
 import Projects from "../components/projects"
 import Contact from "../components/contact"
+import NavBar from "../components/navigationbar"
 
 const IndexPage = () => {
   return (
@@ -18,6 +19,7 @@ const IndexPage = () => {
         <Skills />
         <Projects />
         <Contact />
+        <NavBar />
       </Layout>
     </>
   )
