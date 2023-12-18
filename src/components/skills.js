@@ -13,10 +13,10 @@ import { TbApi, TbSettingsAutomation } from "react-icons/tb"
 import { IoLogoJavascript } from "react-icons/io5"
 import { FaNode } from "react-icons/fa"
 
-const Skills = () => {
+const Skills = ({ id }) => {
   return (
     <>
-      <h2 className="heading" style={{ marginBottom: "3rem" }}>
+      <h2 id={id} className="heading" style={{ marginBottom: "3rem" }}>
         Tech & Skills
       </h2>
       <div className="grid grid-cols-3 gap-4">
