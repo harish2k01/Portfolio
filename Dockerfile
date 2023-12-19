@@ -10,18 +10,11 @@ COPY package*.json ./
 # Install dependencies
 RUN npm install
 
-# Install the Gatsby CLI globally
-RUN npm install -g gatsby-cli
-
 # Copy the rest of the application code
 COPY . .
 
-# Remove the existing public folder if it exists
-RUN rm -rf public
-
 # Build the Gatsby site
-RUN gatsby clean
-RUN gatsby build
+RUN npm run build
 
 # Use a smaller, production-ready image
 FROM nginx:alpine
