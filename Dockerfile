@@ -20,6 +20,7 @@ COPY . .
 RUN rm -rf public
 
 # Build the Gatsby site
+RUN gatsby clean
 RUN gatsby build
 
 # Use a smaller, production-ready image
