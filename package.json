@@ -8,6 +8,7 @@
     "gatsby": "^5.12.12",
     "gatsby-plugin-image": "^3.12.3",
     "gatsby-plugin-manifest": "^5.12.3",
+    "gatsby-plugin-no-sourcemaps": "^5.13.0",
     "gatsby-plugin-sharp": "^5.12.3",
     "gatsby-plugin-umami": "^0.1.5",
     "gatsby-source-filesystem": "^5.12.1",
@@ -39,9 +40,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
+    "url": "https://github.com/harish2k01/Portfolio"
   },
   "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
+    "url": "https://github.com/harish2k01/Portfolio/issues"
   }
 }
