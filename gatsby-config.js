@@ -15,6 +15,7 @@ module.exports = {
     siteUrl: `https://harish2k01.xyz/`,
   },
   plugins: [
+    "gatsby-plugin-no-sourcemaps",
     {
       resolve: 'gatsby-plugin-umami',
       options: {
