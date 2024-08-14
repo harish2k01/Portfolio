@@ -28,7 +28,7 @@ const Intro = ({ id }) => {
           className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 mt-2 block"
           style={{ paddingBottom: "3px" }}
         >
-          Software Engineer
+          Automation Engineer, Quality Engineering
         </span>
       </h1>
       <div className="button-group">
@@ -46,9 +46,10 @@ const Intro = ({ id }) => {
         </button>
       </div>
       <p className="text-gray-400 text-lg tracking-wide mt-9">
-        Hey, I am Harish, Software Engineer from Madurai, with 1.5 years of
-        expertise in Automation and Performance Tests. A Tech Explorer who is
-        currently into Home Lab!
+        Automation Engineer with 2 years of experience, adept at 
+        identifying software issues. Proficient in REST API Automation (Python, Robot Framework) 
+        and Performance Testing (K6). Actively shares insights through blogs. Passionate 
+        about exploring new technologies for collaborative advancement.
       </p>
       <hr className="line" />
     </>

@@ -7,10 +7,10 @@ import {
   FaHtml5,
   FaBootstrap,
 } from "react-icons/fa6"
-import { SiGrafana, SiTailwindcss } from "react-icons/si"
+import { SiGrafana, SiTailwindcss, SiCypress, SiRobotframework } from "react-icons/si"
 import { RiGatsbyFill } from "react-icons/ri"
 import { TbApi, TbSettingsAutomation } from "react-icons/tb"
-import { IoLogoJavascript } from "react-icons/io5"
+import { IoLogoJavascript, IoLogoDocker } from "react-icons/io5"
 import { FaNode } from "react-icons/fa"
 
 const Skills = ({ id }) => {
@@ -19,7 +19,7 @@ const Skills = ({ id }) => {
       <h2 id={id} className="heading" style={{ marginBottom: "3rem" }}>
         Tech & Skills
       </h2>
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-4 gap-2">
         <div className="skills-card">
           <FaHtml5 className="skills-img" />
           <span>HTML</span>
@@ -67,6 +67,18 @@ const Skills = ({ id }) => {
         <div className="skills-card">
           <FaNode className="skills-img" />
           <span>NodeJS</span>
+        </div>
+        <div className="skills-card">
+          <IoLogoDocker className="skills-img" />
+          <span>Docker</span>
+        </div>
+        <div className="skills-card">
+          <SiCypress className="skills-img" />
+          <span>Cypress</span>
+        </div>
+        <div className="skills-card">
+          <SiRobotframework className="skills-img" />
+          <span style={{textAlign: "center"}}>Robot Framework</span>
         </div>
       </div>
       <hr className="line" style={{ marginTop: "2.5rem" }} />
