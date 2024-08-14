@@ -67,6 +67,16 @@ const Timeline = ({ id }) => {
                 </p>
               </div>
             </li>
+            <li>
+              <div className="timeline-content-left">
+                <span className="date">01-Feb-2024</span>
+                <p className="text-content">
+                  Promoted as an
+                  <br />
+                  Automation Engineer, Quality Enginnering <span className="text-gray-400">@Workhall</span>
+                </p>
+              </div>
+            </li>
           </ul>
         </div>
       </div>
