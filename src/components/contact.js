@@ -8,7 +8,7 @@ const Contact = ({ id }) => {
       </h2>
       <p className="tracking-wide">
         For any queries kindly drop a mail at{" "}
-        <a href="mailto:t.harish2478@gmail.com" className="text-gray-400">t.harish2478@gmail.com</a>
+        <a href="mailto:me@harish2k01.in" className="text-gray-400">t.harish2478@gmail.com</a>
       </p>
       <hr className="line" style={{ marginTop: "2.5rem" }} />
     </>
