@@ -1,4 +1,4 @@
-name: Sonarque
+name: Sonarqube Check
 
 on:
   push:
