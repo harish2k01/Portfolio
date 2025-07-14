@@ -1,3 +1,10 @@
+## [0.0.2](https://github.com/harish2k01/Portfolio/compare/v0.0.1...v0.0.2) (2025-07-14)
+
+
+### Bug Fixes
+
+* Update intro.js ([df25a96](https://github.com/harish2k01/Portfolio/commit/df25a96b465f310f505402bc06414a8d966856de))
+
 ## [0.0.1](https://github.com/harish2k01/Portfolio/compare/v0.0.0...v0.0.1) (2025-07-14)
 
 
