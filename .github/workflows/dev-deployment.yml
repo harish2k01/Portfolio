@@ -28,7 +28,7 @@ jobs:
           node-version: '20'
 
       - name: Install semantic-release and plugins
-        run: npm install -g semantic-release @semantic-release/git @semantic-release/changelog @semantic-release/github
+        run: npm install -g semantic-release @semantic-release/github @semantic-release/commit-analyzer @semantic-release/release-notes-generator
 
       - name: Run semantic-release for Dev
         id: semantic
