@@ -1,16 +1,16 @@
-# [0.1.0](https://github.com/harish2k01/Portfolio/compare/v0.0.6...v0.1.0) (2025-07-14)
+## [0.1.1-beta.1](https://github.com/harish2k01/Portfolio/compare/v0.1.0...v0.1.1-beta.1) (2025-07-14)
 
 
 ### Bug Fixes
 
-* Added sonarqube for dev builds ([0f09807](https://github.com/harish2k01/Portfolio/commit/0f098073b251723b397f55349dedeb735f89da85))
-* Fixed Deployment issue ([862e9dc](https://github.com/harish2k01/Portfolio/commit/862e9dc8779adf8b0d2344cb9171931a1dcbd963))
-* Fixed deployment issues ([d2f222b](https://github.com/harish2k01/Portfolio/commit/d2f222bda5c0dd64a5fde41b58ff82f014b12b14))
+* Prod CD issue ([2a44dbe](https://github.com/harish2k01/Portfolio/commit/2a44dbe8fff26b78b1f67b3a6c7f2f9362ec355f))
+
+# [0.1.0-beta.5](https://github.com/harish2k01/Portfolio/compare/v0.1.0-beta.4...v0.1.0-beta.5) (2025-07-14)
 
 
-### Features
+### Bug Fixes
 
-* Added Semantic Versioning for Dev ([b058908](https://github.com/harish2k01/Portfolio/commit/b058908c528bcc558cf70bca0c8f0e830aef1b60))
+* Prod CD issue ([2a44dbe](https://github.com/harish2k01/Portfolio/commit/2a44dbe8fff26b78b1f67b3a6c7f2f9362ec355f))
 
 # [0.1.0-beta.4](https://github.com/harish2k01/Portfolio/compare/v0.1.0-beta.3...v0.1.0-beta.4) (2025-07-14)
 
