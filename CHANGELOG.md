@@ -1,3 +1,10 @@
+# [0.1.0-beta.3](https://github.com/harish2k01/Portfolio/compare/v0.1.0-beta.2...v0.1.0-beta.3) (2025-07-14)
+
+
+### Bug Fixes
+
+* Fixed Deployment issue ([862e9dc](https://github.com/harish2k01/Portfolio/commit/862e9dc8779adf8b0d2344cb9171931a1dcbd963))
+
 # [0.1.0-beta.2](https://github.com/harish2k01/Portfolio/compare/v0.1.0-beta.1...v0.1.0-beta.2) (2025-07-14)
 
 
