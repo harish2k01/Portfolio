@@ -7,7 +7,7 @@ on:
 jobs:
   build:
     name: Sonarqube Scan
-    runs-on: sonarqube
+    runs-on: selfhosted
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
