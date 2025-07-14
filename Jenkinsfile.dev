@@ -1,0 +1,105 @@
+pipeline {
+    agent any
+
+    parameters {
+        string(name: 'VERSION', defaultValue: '', description: 'Semantic version like 1.2.3-beta.0')
+        string(name: 'GITHUB_SHA', defaultValue: '', description: 'GitHub commit SHA')
+        string(name: 'SERVER_URL', defaultValue: '', description: 'URL of the server')
+    }
+
+    environment {
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub-creds')
+        GITHUB_CREDENTIALS = credentials('github-creds')
+        DISCORD_WEBHOOK = credentials('discord-webhook')
+        IMAGE_NAME = 'harish2k01/portfolio'
+        SERVER_CREDENTIALS = credentials('ct-essentials-creds')
+    }
+
+    stages {
+        stage('Validate Pre-release Version') {
+            steps {
+                script {
+                    if (!params.VERSION || !params.VERSION.contains('-')) {
+                        error('VERSION must be a valid pre-release like 1.2.3-beta.0')
+                    }
+                }
+            }
+        }
+
+        stage('Checkout Code') {
+            steps {
+                script {
+                    sh """
+                    git remote set-url origin https://${GITHUB_CREDENTIALS_USR}:${GITHUB_CREDENTIALS_PSW}@github.com/harish2k01/Portfolio.git
+                    git fetch --tags
+                    git checkout v${params.VERSION}
+                    """
+                }
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                sh """
+                docker build -t ${IMAGE_NAME}:${params.VERSION} .
+                docker tag ${IMAGE_NAME}:${params.VERSION} ${IMAGE_NAME}:dev
+                """
+            }
+        }
+
+        stage('Push to Docker Hub') {
+            steps {
+                sh """
+                echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
+                docker push ${IMAGE_NAME}:${params.VERSION}
+                docker push ${IMAGE_NAME}:dev
+                docker logout
+                """
+            }
+        }
+
+        stage('Deploy Development Image') {
+            steps {
+                script {
+                    sh """
+                        sshpass -p '${SERVER_CREDENTIALS_PSW}' ssh -o StrictHostKeyChecking=no ${SERVER_CREDENTIALS_USR}@${params.SERVER_URL} '
+                            cd apps/portfolio/dev &&
+                            sudo docker compose down &&
+                            sudo docker rmi ${IMAGE_NAME}:dev || true &&
+                            sudo docker compose up -d
+                        '
+                    """
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            sendDiscordNotification('SUCCESS', "Dev build `${params.VERSION}` deployed successfully.")
+        }
+        failure {
+            sendDiscordNotification('FAILURE', "Dev build `${params.VERSION}` failed.")
+        }
+    }
+}
+
+def sendDiscordNotification(String status, String message) {
+    def color = status == 'SUCCESS' ? 3066993 : 15158332
+    def payload = """
+    {
+      "username": "Jenkins Bot",
+      "embeds": [{
+        "title": "Dev Build ${status}",
+        "description": "${message}",
+        "color": ${color},
+        "fields": [
+          {"name": "Version", "value": "${params.VERSION}", "inline": true},
+          {"name": "Environment", "value": "Dev", "inline": true}
+        ],
+        "timestamp": "${new Date().format("yyyy-MM-dd'T'HH:mm:ssXXX")}"
+      }]
+    }
+    """
+    sh """curl -X POST -H 'Content-Type: application/json' -d '${payload}' ${DISCORD_WEBHOOK}"""
+}
