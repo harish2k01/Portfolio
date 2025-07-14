@@ -5,6 +5,11 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write        # Required to push tags and commits
+  issues: write          # Required for GitHub releases
+  pull-requests: write
+
 jobs:
   release:
     name: Release
