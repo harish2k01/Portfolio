@@ -1,27 +1,65 @@
 pipeline {
     agent any
-
+    
+    parameters {
+        string(name: 'VERSION', defaultValue: 'latest', description: 'Version tag from semantic-release')
+        string(name: 'GITHUB_SHA', defaultValue: '', description: 'GitHub commit SHA')
+    }
+    
     environment {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub-creds')
         IMAGE_NAME = 'harish2k01/portfolio'
+        VERSION_TAG = "${params.VERSION}"
     }
-
+    
     stages {
-        stage('Checkout SCM') {
-            steps {
-                checkout scm
-            }
-        }
-
-        stage('Build Docker Image') {
+        stage('Validate Parameters') {
             steps {
                 script {
-                    def imageTag = "latest"
-                    sh "docker build -t ${IMAGE_NAME}:${imageTag} ."
+                    echo "Building Docker image with version: ${VERSION_TAG}"
+                    echo "GitHub SHA: ${params.GITHUB_SHA}"
+                    
+                    if (params.VERSION == '' || params.VERSION == 'latest') {
+                        error('VERSION parameter is required and cannot be empty or latest')
+                    }
                 }
             }
         }
-
+        
+        stage('Checkout SCM') {
+            steps {
+                script {
+                    if (params.GITHUB_SHA != '') {
+                        // Checkout specific commit
+                        checkout([
+                            $class: 'GitSCM',
+                            branches: [[name: params.GITHUB_SHA]],
+                            userRemoteConfigs: [[url: 'https://github.com/harish2k01/Portfolio.git']]
+                        ])
+                    } else {
+                        // Checkout tag
+                        checkout([
+                            $class: 'GitSCM',
+                            branches: [[name: "refs/tags/v${VERSION_TAG}"]],
+                            userRemoteConfigs: [[url: 'https://github.com/harish2k01/Portfolio.git']]
+                        ])
+                    }
+                }
+            }
+        }
+        
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    echo "Building Docker image with tag: ${VERSION_TAG}"
+                    sh "docker build -t ${IMAGE_NAME}:${VERSION_TAG} ."
+                    
+                    // Also tag as latest for convenience
+                    sh "docker tag ${IMAGE_NAME}:${VERSION_TAG} ${IMAGE_NAME}:latest"
+                }
+            }
+        }
+        
         stage('Login to Docker Hub') {
             steps {
                 sh '''
@@ -29,14 +67,37 @@ pipeline {
                 '''
             }
         }
-
+        
         stage('Push Docker Image') {
             steps {
                 script {
-                    def imageTag = "latest"
-                    sh "docker push ${IMAGE_NAME}:${imageTag}"
+                    echo "Pushing Docker image with tag: ${VERSION_TAG}"
+                    sh "docker push ${IMAGE_NAME}:${VERSION_TAG}"
+                    sh "docker push ${IMAGE_NAME}:latest"
                 }
             }
+        }
+        
+        stage('Cleanup') {
+            steps {
+                script {
+                    // Clean up local images to save space
+                    sh "docker rmi ${IMAGE_NAME}:${VERSION_TAG} || true"
+                    sh "docker rmi ${IMAGE_NAME}:latest || true"
+                }
+            }
+        }
+    }
+    
+    post {
+        always {
+            sh 'docker logout'
+        }
+        success {
+            echo "Docker image ${IMAGE_NAME}:${VERSION_TAG} built and pushed successfully!"
+        }
+        failure {
+            echo "Pipeline failed. Check the logs for details."
         }
     }
 }
