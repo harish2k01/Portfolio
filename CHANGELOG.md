@@ -1,3 +1,10 @@
+# [0.1.0-beta.1](https://github.com/harish2k01/Portfolio/compare/v0.0.6...v0.1.0-beta.1) (2025-07-14)
+
+
+### Features
+
+* Added Semantic Versioning for Dev ([b058908](https://github.com/harish2k01/Portfolio/commit/b058908c528bcc558cf70bca0c8f0e830aef1b60))
+
 ## [0.0.6](https://github.com/harish2k01/Portfolio/compare/v0.0.5...v0.0.6) (2025-07-14)
 
 
