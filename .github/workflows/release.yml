@@ -26,7 +26,7 @@ jobs:
       - name: Run semantic-release
         id: release
         env:
-          GH_TOKEN: ${{ secrets.GH_PAT }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           npx semantic-release > release-log.txt
           VERSION=$(grep -oP 'v[0-9]+\.[0-9]+\.[0-9]+' release-log.txt | tail -1 || echo "")
