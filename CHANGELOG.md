@@ -1,3 +1,10 @@
+## [0.1.1-beta.1](https://github.com/harish2k01/Portfolio/compare/v0.1.0...v0.1.1-beta.1) (2025-07-14)
+
+
+### Bug Fixes
+
+* Prod CD issue ([2a44dbe](https://github.com/harish2k01/Portfolio/commit/2a44dbe8fff26b78b1f67b3a6c7f2f9362ec355f))
+
 # [0.1.0-beta.5](https://github.com/harish2k01/Portfolio/compare/v0.1.0-beta.4...v0.1.0-beta.5) (2025-07-14)
 
 
