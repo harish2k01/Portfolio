@@ -1,38 +1,35 @@
 name: Release
-
 on:
   push:
-    branches:
-      - main
+    branches: [main]
 
 permissions:
-  contents: write        # Required to push tags and commits
-  issues: write          # Required for GitHub releases
+  contents: write
+  issues: write
   pull-requests: write
 
 jobs:
   release:
-    name: Release
-    runs-on: selfhosted
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
+      - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # needed for full git history
-
-      - name: Setup Node
+          fetch-depth: 0
+          
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
-
-      - name: Install dependencies
+          node-version: '20'
+          
+      - name: Install semantic-release and plugins
         run: npm install -g semantic-release @semantic-release/git @semantic-release/changelog @semantic-release/github
-
+        
       - name: Run semantic-release
-        id: release
+        run: npx semantic-release
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: |
-          npx semantic-release > release-log.txt
-          VERSION=$(grep -oP 'v[0-9]+\.[0-9]+\.[0-9]+' release-log.txt | tail -1 || echo "")
-          echo "version=${VERSION}" >> $GITHUB_OUTPUT
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GIT_AUTHOR_NAME: harish2k01
+          GIT_AUTHOR_EMAIL: ${{ github.actor }}@users.noreply.github.com
+          GIT_COMMITTER_NAME: harish2k01
+          GIT_COMMITTER_EMAIL: ${{ github.actor }}@users.noreply.github.com
