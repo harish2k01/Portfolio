@@ -1,6 +1,12 @@
 {
   "repositoryUrl": "https://github.com/harish2k01/Portfolio.git",
-  "branches": ["main"],
+  "branches": [
+    "main",
+    {
+      "name": "dev",
+      "prerelease": "beta"
+    }
+  ],
   "plugins": [
     "@semantic-release/commit-analyzer",
     "@semantic-release/release-notes-generator",
