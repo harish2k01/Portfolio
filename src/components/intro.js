@@ -46,7 +46,7 @@ const Intro = ({ id }) => {
         </button>
       </div>
       <p className="text-gray-400 text-lg tracking-wide mt-9">
-        Automation Engineer with 2.5 years of experience, adept at 
+        Automation Engineer with 2 years of experience, adept at 
         identifying software issues. Proficient in REST API Automation (Python, Robot Framework) 
         and Performance Testing (K6). Actively shares insights through blogs. Passionate 
         about exploring new technologies for collaborative advancement.
