@@ -1,3 +1,10 @@
+# [0.1.0-beta.2](https://github.com/harish2k01/Portfolio/compare/v0.1.0-beta.1...v0.1.0-beta.2) (2025-07-14)
+
+
+### Bug Fixes
+
+* Added sonarqube for dev builds ([0f09807](https://github.com/harish2k01/Portfolio/commit/0f098073b251723b397f55349dedeb735f89da85))
+
 # [0.1.0-beta.1](https://github.com/harish2k01/Portfolio/compare/v0.0.6...v0.1.0-beta.1) (2025-07-14)
 
 
