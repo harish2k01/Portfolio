@@ -10,6 +10,7 @@ permissions:
 
 jobs:
   release:
+    name: Release Versioning
     runs-on: ubuntu-latest
     outputs:
       version: ${{ steps.semantic.outputs.version }}
@@ -51,6 +52,7 @@ jobs:
           GIT_COMMITTER_EMAIL: ${{ github.actor }}@users.noreply.github.com
 
   trigger-jenkins:
+    name: Jenkins Docker Build
     needs: release
     runs-on: ubuntu-latest
     if: needs.release.outputs.released == 'true'
