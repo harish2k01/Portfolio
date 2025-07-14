@@ -7,7 +7,7 @@ on:
 jobs:
   build:
     name: Sonarqube Scan
-    runs-on: ubuntu-latest
+    runs-on: sonarqube
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
