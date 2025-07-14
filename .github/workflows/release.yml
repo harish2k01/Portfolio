@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   release:
-    name: Release Versioning
+    name: Release Semantic Versioning
     runs-on: ubuntu-latest
     outputs:
       version: ${{ steps.semantic.outputs.version }}
@@ -52,14 +52,11 @@ jobs:
           GIT_COMMITTER_EMAIL: ${{ github.actor }}@users.noreply.github.com
 
   trigger-jenkins:
-    name: Jenkins Docker Build
+    name: Trigger Jenkins Docker Build
     needs: release
     runs-on: ubuntu-latest
     if: needs.release.outputs.released == 'true'
     steps:
       - name: Trigger Jenkins Build
         run: |
-          curl -X POST "${{ secrets.JENKINS_URL }}/job/${{ secrets.JENKINS_JOB_NAME }}/buildWithParameters" \
-            --user "${{ secrets.JENKINS_USER }}:${{ secrets.JENKINS_TOKEN }}" \
-            --data-urlencode "VERSION=${{ needs.release.outputs.version }}" \
-            --data-urlencode "GITHUB_SHA=${{ github.sha }}"
+          curl -X POST "${{ secrets.JENKINS_URL }}/job/${{ secrets.JENKINS_JOB_NAME }}/build?token=${{ secrets.JENKINS_JOB_TOKEN }}&VERSION=${{ needs.release.outputs.version }}&GITHUB_SHA=${{ github.sha }}"
