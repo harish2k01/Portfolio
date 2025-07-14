@@ -26,24 +26,15 @@ pipeline {
             }
         }
         
-        stage('Checkout SCM') {
+        stage('Checkout Specific Tag') {
+            when {
+                expression { params.VERSION != 'latest' }
+            }
             steps {
                 script {
-                    if (params.GITHUB_SHA != '') {
-                        // Checkout specific commit
-                        checkout([
-                            $class: 'GitSCM',
-                            branches: [[name: params.GITHUB_SHA]],
-                            userRemoteConfigs: [[url: 'https://github.com/harish2k01/Portfolio.git']]
-                        ])
-                    } else {
-                        // Checkout tag
-                        checkout([
-                            $class: 'GitSCM',
-                            branches: [[name: "refs/tags/v${VERSION_TAG}"]],
-                            userRemoteConfigs: [[url: 'https://github.com/harish2k01/Portfolio.git']]
-                        ])
-                    }
+                    // Checkout the specific tag
+                    sh "git fetch --tags"
+                    sh "git checkout v${VERSION_TAG}"
                 }
             }
         }
