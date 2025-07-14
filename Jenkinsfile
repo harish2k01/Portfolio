@@ -10,6 +10,7 @@ pipeline {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub-creds')
         IMAGE_NAME = 'harish2k01/portfolio'
         VERSION_TAG = "${params.VERSION}"
+        GITHUB_CREDENTIALS = credentials('github-creds')
     }
     
     stages {
@@ -33,8 +34,11 @@ pipeline {
             steps {
                 script {
                     // Checkout the specific tag
-                    sh "git fetch --tags"
-                    sh "git checkout v${VERSION_TAG}"
+                    sh """
+                    git remote set-url origin https://${GITHUB_CREDENTIALS_USR}:${GITHUB_CREDENTIALS_PSW}@github.com/harish2k01/Portfolio.git
+                    git fetch --tags
+                    git checkout v${VERSION_TAG}
+                    """
                 }
             }
         }
