@@ -61,17 +61,26 @@ pipeline {
 
         stage('Deploy Development Image') {
             steps {
-                sh '''
-                echo $SERVER_CREDENTIALS_PSW | ssh -o StrictHostKeyChecking=no $SERVER_CREDENTIALS_USR@SERVER_URL
-                cd apps/portfolio/dev
-                sudo docker compose down
-                sudo docker rmi $IMAGE_NAME:dev || true
-                echo "$GITHUB_CREDENTIALS_PSW" | docker login ghcr.io -u "$GITHUB_CREDENTIALS_USR" --password-stdin
-                sudo docker compose up -d
-                docker logout
-                '''
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'ct-essentials-creds', usernameVariable: 'SERVER_USER', passwordVariable: 'SERVER_PASS')]) {
+                        def remote = [
+                            host: SERVER_URL,
+                            user: SERVER_USER,
+                            password: SERVER_PASS,
+                            allowAnyHosts: true
+                        ]
+                        sshCommand remote: remote, command: """
+                        cd apps/portfolio/dev
+                        sudo docker compose down
+                        sudo docker rmi ${IMAGE_NAME}:dev || true
+                        echo '${GITHUB_CREDENTIALS_PSW}' | docker login ghcr.io -u '${GITHUB_CREDENTIALS_USR}' --password-stdin
+                        sudo docker compose up -d
+                        """
+                    }
+                }
             }
         }
+
     }
 
     post {
