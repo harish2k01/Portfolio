@@ -76,6 +76,15 @@ pipeline {
                 }
             }
         }
+
+        stage('Clean Docker Images') {
+            steps {
+                sh '''
+                echo '${SERVER_PASS}' | sudo docker system prune -a --volumes -f
+                '''
+            }
+        }
+
     }
 
     post {
