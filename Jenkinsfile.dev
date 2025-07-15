@@ -61,31 +61,40 @@ pipeline {
 
         stage('Make GHCR Tags Public') {
             steps {
-                withCredentials([string(credentialsId: 'github-creds', variable: 'GITHUB_TOKEN')]) {
-                    sh '''
-                    VERSION_ID=$(curl -s -H "Authorization: token ${GITHUB_TOKEN}" \
-                    -H "Accept: application/vnd.github+json" \
-                    https://api.github.com/user/packages/container/portfolio/versions |
-                    jq '.[] | select(.metadata.container.tags[] | contains("'"${VERSION}"'")) | .id')
-
-                    DEV_ID=$(curl -s -H "Authorization: token ${GITHUB_TOKEN}" \
-                    -H "Accept: application/vnd.github+json" \
-                    https://api.github.com/user/packages/container/portfolio/versions |
-                    jq '.[] | select(.metadata.container.tags[] | contains("dev")) | .id')
-
-                    for ID in $VERSION_ID $DEV_ID; do
-                    if [ ! -z "$ID" ]; then
-                        curl -X PATCH \
-                        -H "Authorization: token ${GITHUB_TOKEN}" \
+                script {
+                    withCredentials([
+                        usernamePassword(
+                            credentialsId: 'github-creds',
+                            usernameVariable: 'GITHUB_USER',
+                            passwordVariable: 'GITHUB_TOKEN'
+                        )
+                    ]) {
+                        sh '''
+                        VERSION_ID=$(curl -s -H "Authorization: token ${GITHUB_TOKEN}" \
                         -H "Accept: application/vnd.github+json" \
-                        https://api.github.com/user/packages/container/portfolio/versions/$ID/visibility \
-                        -d '{"visibility":"public"}'
-                    fi
-                    done
-                    '''
+                        https://api.github.com/user/packages/container/portfolio/versions |
+                        jq '.[] | select(.metadata.container.tags[] | contains("'"${VERSION}"'")) | .id')
+
+                        DEV_ID=$(curl -s -H "Authorization: token ${GITHUB_TOKEN}" \
+                        -H "Accept: application/vnd.github+json" \
+                        https://api.github.com/user/packages/container/portfolio/versions |
+                        jq '.[] | select(.metadata.container.tags[] | contains("dev")) | .id')
+
+                        for ID in $VERSION_ID $DEV_ID; do
+                        if [ ! -z "$ID" ]; then
+                            curl -X PATCH \
+                            -H "Authorization: token ${GITHUB_TOKEN}" \
+                            -H "Accept: application/vnd.github+json" \
+                            https://api.github.com/user/packages/container/portfolio/versions/$ID/visibility \
+                            -d '{"visibility":"public"}'
+                        fi
+                        done
+                        '''
+                    }
                 }
             }
         }
+
 
         stage('Deploy Development Image') {
             steps {
