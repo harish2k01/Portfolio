@@ -59,6 +59,40 @@ pipeline {
             }
         }
 
+        stage('Make GHCR Tags Public') {
+            steps {
+                script {
+                    sh '''
+                    VERSION_ID=$(curl -s -H "Authorization: token $GITHUB_CREDENTIALS_PSW" \
+                        -H "Accept: application/vnd.github+json" \
+                        https://api.github.com/user/packages/container/portfolio/versions |
+                        jq '.[] | select(.metadata.container.tags[] | contains("${VERSION}")) | .id')
+
+                    LATEST_ID=$(curl -s -H "Authorization: token $GITHUB_CREDENTIALS_PSW" \
+                        -H "Accept: application/vnd.github+json" \
+                        https://api.github.com/user/packages/container/portfolio/versions |
+                        jq '.[] | select(.metadata.container.tags[] | contains("latest")) | .id')
+
+                    if [ ! -z "$VERSION_ID" ]; then
+                        curl -X PATCH \
+                            -H "Authorization: token $GITHUB_CREDENTIALS_PSW" \
+                            -H "Accept: application/vnd.github+json" \
+                            https://api.github.com/user/packages/container/portfolio/versions/$VERSION_ID/visibility \
+                            -d '{"visibility":"public"}'
+                    fi
+
+                    if [ ! -z "$LATEST_ID" ]; then
+                        curl -X PATCH \
+                            -H "Authorization: token $GITHUB_CREDENTIALS_PSW" \
+                            -H "Accept: application/vnd.github+json" \
+                            https://api.github.com/user/packages/container/portfolio/versions/$LATEST_ID/visibility \
+                            -d '{"visibility":"public"}'
+                    fi
+                    '''
+                }
+            }
+        }
+
         stage('Link Package to Repository') {
             steps {
                 script {
