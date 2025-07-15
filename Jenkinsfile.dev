@@ -10,7 +10,7 @@ pipeline {
     environment {
         GITHUB_CREDENTIALS = credentials('github-creds')
         DISCORD_WEBHOOK = credentials('discord-webhook')
-        IMAGE_NAME = 'ghcr.io/harish2k01/portfolio/portfolio'
+        IMAGE_NAME = 'ghcr.io/harish2k01/portfolio'
         SERVER_CREDENTIALS = credentials('ct-essentials-creds')
     }
 
@@ -38,7 +38,11 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 sh '''
-                docker build -t $IMAGE_NAME:$VERSION .
+                docker build \
+                  --label "org.opencontainers.image.source=https://github.com/harish2k01/Portfolio" \
+                  --label "org.opencontainers.image.description=Portfolio" \
+                  --label "org.opencontainers.image.licenses=MIT" \
+                  -t $IMAGE_NAME:$VERSION .
                 docker tag $IMAGE_NAME:$VERSION $IMAGE_NAME:dev
                 '''
             }
@@ -52,6 +56,21 @@ pipeline {
                 docker push $IMAGE_NAME:dev
                 docker logout
                 '''
+            }
+        }
+
+        stage('Link Package to Repository') {
+            steps {
+                script {
+                    sh '''
+                    curl -X POST \
+                      -H "Authorization: token $GITHUB_CREDENTIALS_PSW" \
+                      -H "Accept: application/vnd.github.v3+json" \
+                      -H "Content-Type: application/json" \
+                      -d '{"repository": "harish2k01/Portfolio"}' \
+                      "https://api.github.com/user/packages/container/portfolio/versions"
+                    '''
+                }
             }
         }
 
