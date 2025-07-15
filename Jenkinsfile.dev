@@ -10,7 +10,7 @@ pipeline {
     environment {
         GITHUB_CREDENTIALS = credentials('github-creds')
         DISCORD_WEBHOOK = credentials('discord-webhook')
-        IMAGE_NAME = 'ghcr.io/harish2k01/portfolio'
+        IMAGE_NAME = 'ghcr.io/harish2k01/portfolio/portfolio'
         SERVER_CREDENTIALS = credentials('ct-essentials-creds')
     }
 
@@ -27,67 +27,58 @@ pipeline {
 
         stage('Checkout Code') {
             steps {
-                script {
-                    sh """
-                    git remote set-url origin https://${GITHUB_CREDENTIALS_USR}:${GITHUB_CREDENTIALS_PSW}@github.com/harish2k01/Portfolio.git
-                    git fetch --tags
-                    git checkout v${params.VERSION}
-                    """
-                }
+                sh '''
+                git remote set-url origin https://${GITHUB_CREDENTIALS_USR}:${GITHUB_CREDENTIALS_PSW}@github.com/harish2k01/Portfolio.git
+                git fetch --tags
+                git checkout v${VERSION}
+                '''
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                sh """
-                docker build -t ${IMAGE_NAME}:${params.VERSION} .
-                docker tag ${IMAGE_NAME}:${params.VERSION} ${IMAGE_NAME}:dev
-                """
+                sh '''
+                docker build -t $IMAGE_NAME:$VERSION .
+                docker tag $IMAGE_NAME:$VERSION $IMAGE_NAME:dev
+                '''
             }
         }
 
         stage('Push to GHCR') {
             steps {
-                sh """
-                echo $GITHUB_CREDENTIALS_PSW | docker login ghcr.io -u $GITHUB_CREDENTIALS_USR --password-stdin
-                docker push ${IMAGE_NAME}:${params.VERSION}
-                docker push ${IMAGE_NAME}:dev
+                sh '''
+                echo "$GITHUB_CREDENTIALS_PSW" | docker login ghcr.io -u "$GITHUB_CREDENTIALS_USR" --password-stdin
+                docker push $IMAGE_NAME:$VERSION
+                docker push $IMAGE_NAME:dev
                 docker logout
-                """
-            }
-        }
-
-        stage('Make Image Public') {
-            steps {
-                sh """
-                echo $GITHUB_CREDENTIALS_PSW | gh auth login --with-token
-                gh api -X PATCH /user/packages/container/portfolio/versions --field visibility=public || true
-                """
+                '''
             }
         }
 
         stage('Deploy Development Image') {
             steps {
-                script {
-                    sh """
-                        sshpass -p '${SERVER_CREDENTIALS_PSW}' ssh -o StrictHostKeyChecking=no ${SERVER_CREDENTIALS_USR}@${params.SERVER_URL} '
-                            cd apps/portfolio/dev &&
-                            sudo docker compose down &&
-                            sudo docker rmi ${IMAGE_NAME}:dev || true &&
-                            sudo docker compose up -d
-                        '
-                    """
-                }
+                sh '''
+                sshpass -p "$SERVER_CREDENTIALS_PSW" ssh -o StrictHostKeyChecking=no "$SERVER_CREDENTIALS_USR"@"$SERVER_URL" '
+                    cd apps/portfolio/dev &&
+                    sudo docker compose down &&
+                    sudo docker rmi $IMAGE_NAME:dev || true &&
+                    sudo docker compose up -d
+                '
+                '''
             }
         }
     }
 
     post {
         success {
-            sendDiscordNotification('SUCCESS', "Dev build `${params.VERSION}` deployed successfully.")
+            script {
+                sendDiscordNotification('SUCCESS', "Dev build `${params.VERSION}` deployed successfully.")
+            }
         }
         failure {
-            sendDiscordNotification('FAILURE', "Dev build `${params.VERSION}` failed.")
+            script {
+                sendDiscordNotification('FAILURE', "Dev build `${params.VERSION}` failed.")
+            }
         }
     }
 }
@@ -105,9 +96,9 @@ def sendDiscordNotification(String status, String message) {
           {"name": "Version", "value": "${params.VERSION}", "inline": true},
           {"name": "Environment", "value": "Dev", "inline": true}
         ],
-        "timestamp": "${new Date().format("yyyy-MM-dd'T'HH:mm:ssXXX")}"
+        "timestamp": "${new Date().format("yyyy-MM-dd'T'HH:mm:ssXXX")}" 
       }]
     }
     """
-    sh """curl -X POST -H 'Content-Type: application/json' -d '${payload}' ${DISCORD_WEBHOOK}"""
+    sh """curl -X POST -H 'Content-Type: application/json' -d '${payload}' $DISCORD_WEBHOOK"""
 }
