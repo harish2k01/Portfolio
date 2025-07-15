@@ -57,6 +57,7 @@ jobs:
     needs: release-prod
     runs-on: selfhosted
     if: needs.release-prod.outputs.released == 'true'
+    environment: Production
     steps:
       - name: Trigger Jenkins Prod Job
         run: |
