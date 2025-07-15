@@ -61,48 +61,27 @@ pipeline {
 
         stage('Make GHCR Tags Public') {
             steps {
-                script {
-                    sh """
-                    VERSION_ID=\$(curl -s -H "Authorization: token $GITHUB_CREDENTIALS_PSW" \
+                withCredentials([string(credentialsId: 'github-creds', variable: 'GITHUB_TOKEN')]) {
+                    sh '''
+                    VERSION_ID=$(curl -s -H "Authorization: token ${GITHUB_TOKEN}" \
                     -H "Accept: application/vnd.github+json" \
                     https://api.github.com/user/packages/container/portfolio/versions |
-                    jq '.[] | select(.metadata.container.tags[] | contains("${VERSION}")) | .id')
+                    jq '.[] | select(.metadata.container.tags[] | contains("'"${VERSION}"'")) | .id')
 
-                    DEV_ID=\$(curl -s -H "Authorization: token $GITHUB_CREDENTIALS_PSW" \
+                    DEV_ID=$(curl -s -H "Authorization: token ${GITHUB_TOKEN}" \
                     -H "Accept: application/vnd.github+json" \
                     https://api.github.com/user/packages/container/portfolio/versions |
                     jq '.[] | select(.metadata.container.tags[] | contains("dev")) | .id')
 
-                    if [ ! -z "\$VERSION_ID" ]; then
-                    curl -X PATCH \
-                        -H "Authorization: token $GITHUB_CREDENTIALS_PSW" \
+                    for ID in $VERSION_ID $DEV_ID; do
+                    if [ ! -z "$ID" ]; then
+                        curl -X PATCH \
+                        -H "Authorization: token ${GITHUB_TOKEN}" \
                         -H "Accept: application/vnd.github+json" \
-                        https://api.github.com/user/packages/container/portfolio/versions/\$VERSION_ID/visibility \
+                        https://api.github.com/user/packages/container/portfolio/versions/$ID/visibility \
                         -d '{"visibility":"public"}'
                     fi
-
-                    if [ ! -z "\$DEV_ID" ]; then
-                    curl -X PATCH \
-                        -H "Authorization: token $GITHUB_CREDENTIALS_PSW" \
-                        -H "Accept: application/vnd.github+json" \
-                        https://api.github.com/user/packages/container/portfolio/versions/\$DEV_ID/visibility \
-                        -d '{"visibility":"public"}'
-                    fi
-                    """
-                }
-            }
-        }
-
-        stage('Link Package to Repository') {
-            steps {
-                script {
-                    sh '''
-                    curl -X POST \
-                      -H "Authorization: token $GITHUB_CREDENTIALS_PSW" \
-                      -H "Accept: application/vnd.github.v3+json" \
-                      -H "Content-Type: application/json" \
-                      -d '{"repository": "harish2k01/Portfolio"}' \
-                      "https://api.github.com/user/packages/container/portfolio/versions"
+                    done
                     '''
                 }
             }
