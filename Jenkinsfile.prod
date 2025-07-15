@@ -8,10 +8,9 @@ pipeline {
     }
 
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('dockerhub-creds')
         GITHUB_CREDENTIALS = credentials('github-creds')
         DISCORD_WEBHOOK = credentials('discord-webhook')
-        IMAGE_NAME = 'harish2k01/portfolio'
+        IMAGE_NAME = 'ghcr.io/harish2k01/portfolio'
         SERVER_CREDENTIALS = credentials('ct-essentials-creds')
     }
 
@@ -47,14 +46,23 @@ pipeline {
             }
         }
 
-        stage('Push to Docker Hub') {
+        stage('Push to GHCR') {
             steps {
                 sh """
-                echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
+                echo $GITHUB_CREDENTIALS_PSW | docker login ghcr.io -u $GITHUB_CREDENTIALS_USR --password-stdin
                 docker push ${IMAGE_NAME}:${params.VERSION}
                 docker push ${IMAGE_NAME}:latest
                 docker logout
                 """
+            }
+        }
+
+        stage('Make Image Public') {
+            steps {
+                sh '''
+                echo $GITHUB_CREDENTIALS_PSW | gh auth login --with-token
+                gh api -X PATCH /user/packages/container/portfolio/visibility -f visibility=public || true
+                '''
             }
         }
 
