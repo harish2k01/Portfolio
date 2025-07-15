@@ -59,64 +59,16 @@ pipeline {
             }
         }
 
-        stage('Make GHCR Tags Public') {
-            steps {
-                script {
-                    sh '''
-                    VERSION_ID=$(curl -s -H "Authorization: token $GITHUB_CREDENTIALS_PSW" \
-                        -H "Accept: application/vnd.github+json" \
-                        https://api.github.com/user/packages/container/portfolio/versions |
-                        jq '.[] | select(.metadata.container.tags[] | contains("${VERSION}")) | .id')
-
-                    LATEST_ID=$(curl -s -H "Authorization: token $GITHUB_CREDENTIALS_PSW" \
-                        -H "Accept: application/vnd.github+json" \
-                        https://api.github.com/user/packages/container/portfolio/versions |
-                        jq '.[] | select(.metadata.container.tags[] | contains("latest")) | .id')
-
-                    if [ ! -z "$VERSION_ID" ]; then
-                        curl -X PATCH \
-                            -H "Authorization: token $GITHUB_CREDENTIALS_PSW" \
-                            -H "Accept: application/vnd.github+json" \
-                            https://api.github.com/user/packages/container/portfolio/versions/$VERSION_ID/visibility \
-                            -d '{"visibility":"public"}'
-                    fi
-
-                    if [ ! -z "$LATEST_ID" ]; then
-                        curl -X PATCH \
-                            -H "Authorization: token $GITHUB_CREDENTIALS_PSW" \
-                            -H "Accept: application/vnd.github+json" \
-                            https://api.github.com/user/packages/container/portfolio/versions/$LATEST_ID/visibility \
-                            -d '{"visibility":"public"}'
-                    fi
-                    '''
-                }
-            }
-        }
-
-        stage('Link Package to Repository') {
-            steps {
-                script {
-                    sh '''
-                    curl -X POST \
-                      -H "Authorization: token $GITHUB_CREDENTIALS_PSW" \
-                      -H "Accept: application/vnd.github.v3+json" \
-                      -H "Content-Type: application/json" \
-                      -d '{"repository": "harish2k01/Portfolio"}' \
-                      "https://api.github.com/user/packages/container/portfolio/versions"
-                    '''
-                }
-            }
-        }
-
         stage('Deploy Production Image') {
             steps {
                 sh '''
-                sshpass -p "$SERVER_CREDENTIALS_PSW" ssh -o StrictHostKeyChecking=no "$SERVER_CREDENTIALS_USR"@"$SERVER_URL" '
-                    cd apps/portfolio/prod &&
-                    sudo docker compose down &&
-                    sudo docker rmi $IMAGE_NAME:latest || true &&
-                    sudo docker compose up -d
-                '
+                echo $SERVER_CREDENTIALS_PSW ssh -o StrictHostKeyChecking=no $SERVER_CREDENTIALS_USR@SERVER_URL
+                cd apps/portfolio/prod
+                sudo docker compose down
+                sudo docker rmi $IMAGE_NAME:latest || true
+                echo "$GITHUB_CREDENTIALS_PSW" | docker login ghcr.io -u "$GITHUB_CREDENTIALS_USR" --password-stdin
+                sudo docker compose up -d
+                docker logout
                 '''
             }
         }

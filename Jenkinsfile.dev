@@ -59,52 +59,16 @@ pipeline {
             }
         }
 
-        stage('Make GHCR Tags Public') {
-            steps {
-                script {
-                    withCredentials([
-                        usernamePassword(
-                            credentialsId: 'github-creds',
-                            usernameVariable: 'GITHUB_USER',
-                            passwordVariable: 'GITHUB_TOKEN'
-                        )
-                    ]) {
-                        sh '''
-                        VERSION_ID=$(curl -s -H "Authorization: token ${GITHUB_TOKEN}" \
-                        -H "Accept: application/vnd.github+json" \
-                        https://api.github.com/user/packages/container/portfolio/versions |
-                        jq '.[] | select(.metadata.container.tags[] | contains("'"${VERSION}"'")) | .id')
-
-                        DEV_ID=$(curl -s -H "Authorization: token ${GITHUB_TOKEN}" \
-                        -H "Accept: application/vnd.github+json" \
-                        https://api.github.com/user/packages/container/portfolio/versions |
-                        jq '.[] | select(.metadata.container.tags[] | contains("dev")) | .id')
-
-                        for ID in $VERSION_ID $DEV_ID; do
-                        if [ ! -z "$ID" ]; then
-                            curl -X PATCH \
-                            -H "Authorization: token ${GITHUB_TOKEN}" \
-                            -H "Accept: application/vnd.github+json" \
-                            https://api.github.com/user/packages/container/portfolio/versions/$ID/visibility \
-                            -d '{"visibility":"public"}'
-                        fi
-                        done
-                        '''
-                    }
-                }
-            }
-        }
-
-
         stage('Deploy Development Image') {
             steps {
                 sh '''
-                sshpass -p "$SERVER_CREDENTIALS_PSW" ssh -o StrictHostKeyChecking=no "$SERVER_CREDENTIALS_USR"@"$SERVER_URL" '
-                    cd apps/portfolio/dev &&
-                    sudo docker compose down &&
-                    sudo docker rmi $IMAGE_NAME:dev || true &&
-                    sudo docker compose up -d
-                '
+                echo $SERVER_CREDENTIALS_PSW ssh -o StrictHostKeyChecking=no $SERVER_CREDENTIALS_USR@SERVER_URL
+                cd apps/portfolio/dev
+                sudo docker compose down
+                sudo docker rmi $IMAGE_NAME:dev || true
+                echo "$GITHUB_CREDENTIALS_PSW" | docker login ghcr.io -u "$GITHUB_CREDENTIALS_USR" --password-stdin
+                sudo docker compose up -d
+                docker logout
                 '''
             }
         }
