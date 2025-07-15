@@ -8,10 +8,9 @@ pipeline {
     }
 
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('dockerhub-creds')
         GITHUB_CREDENTIALS = credentials('github-creds')
         DISCORD_WEBHOOK = credentials('discord-webhook')
-        IMAGE_NAME = 'harish2k01/portfolio'
+        IMAGE_NAME = 'ghcr.io/harish2k01/portfolio'
         SERVER_CREDENTIALS = credentials('ct-essentials-creds')
     }
 
@@ -28,58 +27,76 @@ pipeline {
 
         stage('Checkout Code') {
             steps {
-                script {
-                    sh """
-                    git remote set-url origin https://${GITHUB_CREDENTIALS_USR}:${GITHUB_CREDENTIALS_PSW}@github.com/harish2k01/Portfolio.git
-                    git fetch --tags
-                    git checkout v${params.VERSION}
-                    """
-                }
+                sh '''
+                git remote set-url origin https://${GITHUB_CREDENTIALS_USR}:${GITHUB_CREDENTIALS_PSW}@github.com/harish2k01/Portfolio.git
+                git fetch --tags
+                git checkout v${VERSION}
+                '''
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                sh """
-                docker build -t ${IMAGE_NAME}:${params.VERSION} .
-                docker tag ${IMAGE_NAME}:${params.VERSION} ${IMAGE_NAME}:latest
-                """
+                sh '''
+                docker build \
+                  --label "org.opencontainers.image.source=https://github.com/harish2k01/Portfolio" \
+                  --label "org.opencontainers.image.description=Portfolio" \
+                  --label "org.opencontainers.image.licenses=MIT" \
+                  -t $IMAGE_NAME:$VERSION .
+                docker tag $IMAGE_NAME:$VERSION $IMAGE_NAME:latest
+                '''
             }
         }
 
-        stage('Push to Docker Hub') {
+        stage('Push to GHCR') {
             steps {
-                sh """
-                echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
-                docker push ${IMAGE_NAME}:${params.VERSION}
-                docker push ${IMAGE_NAME}:latest
+                sh '''
+                echo "$GITHUB_CREDENTIALS_PSW" | docker login ghcr.io -u "$GITHUB_CREDENTIALS_USR" --password-stdin
+                docker push $IMAGE_NAME:$VERSION
+                docker push $IMAGE_NAME:latest
                 docker logout
-                """
+                '''
             }
         }
 
         stage('Deploy Production Image') {
             steps {
                 script {
-                    sh """
-                        sshpass -p '${SERVER_CREDENTIALS_PSW}' ssh -o StrictHostKeyChecking=no ${SERVER_CREDENTIALS_USR}@${params.SERVER_URL} '
+                    withCredentials([usernamePassword(credentialsId: 'ct-essentials-creds', usernameVariable: 'SERVER_USER', passwordVariable: 'SERVER_PASS')]) {
+                        sh '''
+                            sshpass -p "${SERVER_PASS}" ssh -o StrictHostKeyChecking=no ${SERVER_USER}@${SERVER_URL} "
                             cd apps/portfolio/prod &&
                             sudo docker compose down &&
                             sudo docker rmi ${IMAGE_NAME}:latest || true &&
+                            echo '${GITHUB_CREDENTIALS_PSW}' | docker login ghcr.io -u '${GITHUB_CREDENTIALS_USR}' --password-stdin &&
                             sudo docker compose up -d
-                        '
-                    """
+                            "
+                        '''
+                    }
                 }
             }
         }
+
+        stage('Clean Docker Images') {
+            steps {
+                sh '''
+                docker system prune -a --volumes -f
+                '''
+            }
+        }
+
     }
 
     post {
         success {
-            sendDiscordNotification('SUCCESS', "Production build `${params.VERSION}` deployed successfully.")
+            script {
+                sendDiscordNotification('SUCCESS', "Production build `${params.VERSION}` deployed successfully.")
+            }
         }
         failure {
-            sendDiscordNotification('FAILURE', "Production build `${params.VERSION}` failed.")
+            script {
+                sendDiscordNotification('FAILURE', "Production build `${params.VERSION}` failed.")
+            }
         }
     }
 }
@@ -101,5 +118,5 @@ def sendDiscordNotification(String status, String message) {
       }]
     }
     """
-    sh """curl -X POST -H 'Content-Type: application/json' -d '${payload}' ${DISCORD_WEBHOOK}"""
+    sh """curl -X POST -H 'Content-Type: application/json' -d '${payload}' $DISCORD_WEBHOOK"""
 }

@@ -57,6 +57,7 @@ jobs:
     needs: release-dev
     runs-on: selfhosted
     if: needs.release-dev.outputs.released == 'true'
+    environment: Dev
     steps:
       - name: Trigger Jenkins Dev Job
         run: |
