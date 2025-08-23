@@ -7,11 +7,11 @@ import {
   FaHtml5,
   FaBootstrap,
 } from "react-icons/fa6"
-import { SiGrafana, SiTailwindcss, SiCypress, SiRobotframework } from "react-icons/si"
+import { SiGrafana, SiTailwindcss, SiRobotframework, SiKubernetes, SiK6, SiPrometheus } from "react-icons/si"
 import { RiGatsbyFill } from "react-icons/ri"
-import { TbApi, TbSettingsAutomation } from "react-icons/tb"
+import { TbApi} from "react-icons/tb"
 import { IoLogoJavascript, IoLogoDocker } from "react-icons/io5"
-import { FaNode } from "react-icons/fa"
+import { FaGit, FaGithub, FaJenkins, FaLinux } from "react-icons/fa"
 
 const Skills = ({ id }) => {
   return (
@@ -20,6 +20,62 @@ const Skills = ({ id }) => {
         Tech & Skills
       </h2>
       <div className="grid grid-cols-4 gap-2">
+        <div className="skills-card">
+          <FaPython className="skills-img" />
+          <span>Python</span>
+        </div>
+        <div className="skills-card">
+          <TbApi className="skills-img" />
+          <span style={{textAlign: "center"}}>REST API Automation</span>
+        </div>
+        <div className="skills-card">
+          <SiRobotframework className="skills-img" />
+          <span style={{textAlign: "center"}}>Robot Framework</span>
+        </div>
+        <div className="skills-card">
+          <SiK6 className="skills-img" />
+          <span>K6</span>
+        </div>
+        <div className="skills-card">
+          <SiKubernetes className="skills-img" />
+          <span>Kubernetes</span>
+        </div>
+        <div className="skills-card">
+          <IoLogoDocker className="skills-img" />
+          <span>Docker</span>
+        </div>
+        <div className="skills-card">
+          <FaGit className="skills-img" />
+          <span>Git</span>
+        </div>
+        <div className="skills-card">
+          <FaGithub className="skills-img" />
+          <span>GitHub Actions</span>
+        </div>
+        <div className="skills-card">
+          <FaJenkins className="skills-img" />
+          <span>Jenkins</span>
+        </div>
+        <div className="skills-card">
+          <SiGrafana className="skills-img" />
+          <span>Grafana</span>
+        </div>
+        <div className="skills-card">
+          <SiPrometheus className="skills-img" />
+          <span>Prometheus</span>
+        </div>
+        <div className="skills-card">
+          <FaLinux className="skills-img" />
+          <span>Linux</span>
+        </div>
+        <div className="skills-card">
+          <IoLogoJavascript className="skills-img" />
+          <span>Javascript</span>
+        </div>
+        <div className="skills-card">
+          <FaJava className="skills-img" />
+          <span>Java</span>
+        </div>
         <div className="skills-card">
           <FaHtml5 className="skills-img" />
           <span>HTML</span>
@@ -39,46 +95,6 @@ const Skills = ({ id }) => {
         <div className="skills-card">
           <RiGatsbyFill className="skills-img" />
           <span>GatsbyJS</span>
-        </div>
-        <div className="skills-card">
-          <FaJava className="skills-img" />
-          <span>Java</span>
-        </div>
-        <div className="skills-card">
-          <FaPython className="skills-img" />
-          <span>Python</span>
-        </div>
-        <div className="skills-card">
-          <TbApi className="skills-img" />
-          <span>REST API</span>
-        </div>
-        <div className="skills-card">
-          <IoLogoJavascript className="skills-img" />
-          <span>Javascript</span>
-        </div>
-        <div className="skills-card">
-          <SiGrafana className="skills-img" />
-          <span>Grafana K6</span>
-        </div>
-        <div className="skills-card">
-          <TbSettingsAutomation className="skills-img" />
-          <span style={{textAlign: "center"}}>QA & Automation</span>
-        </div>
-        <div className="skills-card">
-          <FaNode className="skills-img" />
-          <span>NodeJS</span>
-        </div>
-        <div className="skills-card">
-          <IoLogoDocker className="skills-img" />
-          <span>Docker</span>
-        </div>
-        <div className="skills-card">
-          <SiCypress className="skills-img" />
-          <span>Cypress</span>
-        </div>
-        <div className="skills-card">
-          <SiRobotframework className="skills-img" />
-          <span style={{textAlign: "center"}}>Robot Framework</span>
         </div>
       </div>
       <hr className="line" style={{ marginTop: "2.5rem" }} />

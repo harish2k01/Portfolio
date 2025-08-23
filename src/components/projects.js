@@ -9,6 +9,17 @@ const Projects = ({ id }) => {
         Hobby Projects
       </h2>
       <div className="grid grid-cols-2 gap-4">
+        <a href="https://github.com/harish2k01/Portfolio" target="_blank">
+          <div className="projects-card">
+            <FaArrowRight className="project-img" />
+            <div className="project-card-content">
+              <h3 className="project-card-head">Portfolio Website</h3>
+              <p className="text-gray-400">
+                A Simple Personal Portfolio Website
+              </p>
+            </div>
+          </div>
+        </a>
         <a href="https://github.com/harish2k01/Tic-Tac-Toe" target="_blank">
           <div className="projects-card">
             <FaArrowRight className="project-img" />
@@ -42,17 +53,6 @@ const Projects = ({ id }) => {
               <p className="text-gray-400">
                 A Switch that collects electricity consumption details &
                 predicts the future trends
-              </p>
-            </div>
-          </div>
-        </a>
-        <a href="https://harish2k01.xyz" target="_blank">
-          <div className="projects-card">
-            <FaArrowRight className="project-img" />
-            <div className="project-card-content">
-              <h3 className="project-card-head">Portfolio Website</h3>
-              <p className="text-gray-400">
-                A Simple Personal Portfolio Website
               </p>
             </div>
           </div>
