@@ -5,7 +5,7 @@
   "version": "0.1.0",
   "author": "Harish",
   "dependencies": {
-    "gatsby": "^5.12.12",
+    "gatsby": "^5.15.0",
     "gatsby-plugin-image": "^3.12.3",
     "gatsby-plugin-manifest": "^5.12.3",
     "gatsby-plugin-no-sourcemaps": "^5.13.0",
@@ -21,7 +21,7 @@
     "@babel/helpers": "^7.26.10",
     "serialize-javascript": "^6.0.2",
     "nanoid": "^5.0.9",
-    "cookie": "^0.7.0"
+    "cookie": "^1.0.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.16",
