@@ -39,10 +39,10 @@ pipeline {
             steps {
                 sh '''
                 docker build \
-                  --label "org.opencontainers.image.source=https://github.com/harish2k01/Portfolio" \
-                  --label "org.opencontainers.image.description=Portfolio" \
-                  --label "org.opencontainers.image.licenses=MIT" \
-                  -t $IMAGE_NAME:$VERSION .
+                    --label "org.opencontainers.image.source=https://github.com/harish2k01/Portfolio" \
+                    --label "org.opencontainers.image.description=Portfolio" \
+                    --label "org.opencontainers.image.licenses=MIT" \
+                    -t $IMAGE_NAME:$VERSION .
                 docker tag $IMAGE_NAME:$VERSION $IMAGE_NAME:latest
                 '''
             }
@@ -105,17 +105,17 @@ def sendDiscordNotification(String status, String message) {
     def color = status == 'SUCCESS' ? 3066993 : 15158332
     def payload = """
     {
-      "username": "Jenkins Bot",
-      "embeds": [{
-        "title": "Production Build ${status}",
-        "description": "${message}",
-        "color": ${color},
-        "fields": [
-          {"name": "Version", "value": "${params.VERSION}", "inline": true},
-          {"name": "Environment", "value": "Production", "inline": true}
-        ],
-        "timestamp": "${new Date().format("yyyy-MM-dd'T'HH:mm:ssXXX")}"
-      }]
+        "username": "Jenkins Bot",
+        "embeds": [{
+            "title": "Production Build ${status}",
+            "description": "${message}",
+            "color": ${color},
+            "fields": [
+                {"name": "Version", "value": "${params.VERSION}", "inline": true},
+                {"name": "Environment", "value": "Production", "inline": true}
+            ],
+            "timestamp": "${new Date().format("yyyy-MM-dd'T'HH:mm:ssXXX")}"
+        }]
     }
     """
     sh """curl -X POST -H 'Content-Type: application/json' -d '${payload}' $DISCORD_WEBHOOK"""
