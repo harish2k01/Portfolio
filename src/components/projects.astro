@@ -1,0 +1,66 @@
+---
+import "../styles/projects.css"
+import { FaArrowRight } from "react-icons/fa6"
+
+interface Props {
+  id?: string
+}
+
+const { id } = Astro.props as Props
+---
+
+<>
+  <h2 id={id} class="heading" style={{ marginBottom: "3rem" }}>
+    Hobby Projects
+  </h2>
+  <div class="grid grid-cols-2 gap-4">
+    <a href="https://github.com/harish2k01/Portfolio" target="_blank">
+      <div class="projects-card">
+        <FaArrowRight className="project-img" client:load />
+        <div class="project-card-content">
+          <h3 class="project-card-head">Portfolio Website</h3>
+          <p class="text-gray-400">
+            A Simple Personal Portfolio Website
+          </p>
+        </div>
+      </div>
+    </a>
+    <a href="https://github.com/harish2k01/Tic-Tac-Toe" target="_blank">
+      <div class="projects-card">
+        <FaArrowRight className="project-img" client:load />
+        <div class="project-card-content">
+          <h3 class="project-card-head">Tic Tac Toe</h3>
+          <p class="text-gray-400">
+            An Android App to play the classic X or O game with 2 players
+          </p>
+        </div>
+      </div>
+    </a>
+    <a
+      href="https://github.com/harish2k01/Hospital-Management-System-Flask"
+      target="_blank"
+    >
+      <div class="projects-card">
+        <FaArrowRight className="project-img" client:load />
+        <div class="project-card-content">
+          <h3 class="project-card-head">Hospital Management System</h3>
+          <p class="text-gray-400">
+            A basic & simple Hospital Management System Web App
+          </p>
+        </div>
+      </div>
+    </a>
+    <a href="https://github.com/harish2k01/Smart-Switch" target="_blank">
+      <div class="projects-card">
+        <FaArrowRight className="project-img" client:load />
+        <div class="project-card-content">
+          <h3 class="project-card-head">Smart Switch</h3>
+          <p class="text-gray-400">
+            Home Automation based project using IoT & Raspberry Pi
+          </p>
+        </div>
+      </div>
+    </a>
+  </div>
+  <hr class="line" style={{ marginTop: "2.5rem" }} />
+</>

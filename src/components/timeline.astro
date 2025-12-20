@@ -1,0 +1,89 @@
+---
+import "../styles/timeline.css"
+
+interface Props {
+  id?: string
+}
+
+const { id } = Astro.props as Props
+---
+
+<>
+  <h2 id ={id} class="heading">My Timeline</h2>
+  <div class="timeline-main">
+    <div class="timeline">
+      <ul>
+        <li>
+          <div class="timeline-content-left">
+            <span class="date">01-Apr-2016</span>
+            <p class="text-content">
+              Completed 10th, ICSE{" "}
+              <span class="text-gray-400">@Vikaasa School</span>
+            </p>
+          </div>
+        </li>
+        <li>
+          <div class="timeline-content-right">
+            <span class="date">01-Apr-2018</span>
+            <p>
+              Completed 12th, ISC
+              <br />
+              <span class="text-gray-400">@Vikaasa School</span>
+            </p>
+          </div>
+        </li>
+        <li>
+          <div class="timeline-content-left">
+            <span class="date">18-Oct-2021</span>
+            <p class="text-content">
+              Joined <span class="text-gray-400">@Vuram</span>
+              <br />
+              as an Intern
+            </p>
+          </div>
+        </li>
+        <li>
+          <div class="timeline-content-right">
+            <span class="date">01-May-2022</span>
+            <p>
+              Graduated BE
+              <br />
+              in CSE <span class="text-gray-400">@VCET</span>
+            </p>
+          </div>
+        </li>
+        <li>
+          <div class="timeline-content-left">
+            <span class="date">01-Jul-2022</span>
+            <p class="text-content">
+              Continued as an
+              <br />
+              Intern with <span class="text-gray-400">@Workhall</span>
+            </p>
+          </div>
+        </li>
+        <li>
+          <div class="timeline-content-right">
+            <span class="date">01-Aug-2022</span>
+            <p>
+              Moved to Full Time{" "}
+              <span class="text-gray-400">@Workhall</span> as Associate
+              Software Engineer
+            </p>
+          </div>
+        </li>
+        <li>
+          <div class="timeline-content-left">
+            <span class="date">01-Feb-2024</span>
+            <p class="text-content">
+              Promoted as an
+              <br />
+              Automation Engineer, Quality Enginnering <span class="text-gray-400">@Workhall</span>
+            </p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <hr class="line" style={{ marginTop: "2.5rem" }} />
+</>

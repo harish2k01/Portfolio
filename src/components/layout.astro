@@ -1,0 +1,25 @@
+---
+import "../styles/global.css"
+---
+
+<>
+  <div
+    class="absolute top-0 z-[-2] bg-[#000000] bg-[radial-gradient(#ffffff33_1px,#000_1px)] bg-[size:30px_30px]"
+    style={{
+      minWidth: "-webkit-fill-available",
+      minHeight: "-webkit-fill-available",
+    }}
+  >
+    <div
+      class="flex items-center justify-center"
+      style={{ marginTop: "50px", marginBottom: "50px", padding: "50px" }}
+    >
+      <section class="mx-auto max-w-lg">
+        <article class="text-slate-200 slide-in-bottom">
+          <slot />
+        </article>
+      </section>
+    </div>
+  </div>
+</>
+

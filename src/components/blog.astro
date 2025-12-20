@@ -1,0 +1,30 @@
+---
+import "../styles/blog.css"
+
+interface Props {
+  id?: string
+}
+
+const { id } = Astro.props as Props
+---
+
+<>
+  <h2 id={id} class="heading" style={{ marginBottom: "3rem" }}>
+    Blog
+  </h2>
+  <div class="card">
+    <a href="https://harish2k01.in" target="_blank">
+      <img
+        src="/blog.jpg"
+        class="image"
+        alt="Blog Image"
+      />
+      <div class="card-content">
+        <h3 class="card-head">Harish's Tech Bytes</h3>
+        <p class="text-gray-400">Elevate your tech game with expert tips & guides at Harish's Tech Bytes - Your gateway to Digital Success!</p>
+        <p class="text-gray-400" style={{paddingTop: "20px"}}>A Tech Blog with contents covering different domains and tutorials...</p>
+      </div>
+    </a>
+  </div>
+  <hr class="line" style={{ marginTop: "2.5rem" }} />
+</>
