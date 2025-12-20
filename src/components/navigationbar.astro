@@ -1,0 +1,39 @@
+---
+import "../styles/navigationbar.css"
+import { FaHome } from "react-icons/fa"
+import { FaLaptop, FaPencil } from "react-icons/fa6"
+import { IoNewspaperOutline } from "react-icons/io5"
+import { GrTechnology } from "react-icons/gr"
+---
+
+<>
+  <div class="nav-div">
+    <nav class="nav">
+      <a href="#intro" class="nav-link">
+        <div class="nav-img">
+          <FaHome className="nav-div-img" client:load />
+        </div>
+      </a>
+      <a href="#timeline" class="nav-link">
+        <div class="nav-img">
+          <FaLaptop className="nav-div-img" client:load />
+        </div>
+      </a>
+      <a href="#blog" class="nav-link">
+        <div class="nav-img">
+          <IoNewspaperOutline className="nav-div-img" client:load />
+        </div>
+      </a>
+      <a href="#techskills" class="nav-link">
+        <div class="nav-img">
+          <GrTechnology className="nav-div-img" client:load />
+        </div>
+      </a>
+      <a href="#projects" class="nav-link">
+        <div class="nav-img">
+          <FaPencil className="nav-div-img" client:load />
+        </div>
+      </a>
+    </nav>
+  </div>
+</>

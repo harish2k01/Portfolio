@@ -16,6 +16,7 @@
 .timeline ul li {
   color: white;
   margin-bottom: 30px;
+  width: 50%;
 }
 
 .timeline ul li:last-child {
@@ -61,10 +62,6 @@
   .timeline::before {
     height: 83%;
   }
-}
-
-.timeline ul li {
-  width: 50%;
 }
 
 .timeline ul li:nth-child(odd) {

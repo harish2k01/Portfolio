@@ -1,6 +1,6 @@
 # Portfolio Project
 
-This is a personal portfolio project built with Gatsby, React, and Tailwind CSS. It is designed to showcase my development and DevOps skills, including CI/CD, containerization, and code quality practices.
+This is a personal portfolio project built with Astro, React, and Tailwind CSS. It is designed to showcase my development and DevOps skills, including CI/CD, containerization, and code quality practices.
 
 ## 🚀 Features
 - Modern responsive design using Tailwind CSS
@@ -12,7 +12,7 @@ This is a personal portfolio project built with Gatsby, React, and Tailwind CSS.
 ## 🛠️ Workflow
 1. **Development**
    - Edit source files in `src/` for pages, components, and styles.
-   - Use `gatsby develop` to run the site locally.
+   - Use `npm run dev` to run the site locally.
 2. **CI/CD**
    - Jenkins pipelines (`Jenkinsfile.dev`, `Jenkinsfile.prod`) automate build, test, and deployment.
    - SonarQube analyzes code quality and security.
@@ -23,8 +23,8 @@ This is a personal portfolio project built with Gatsby, React, and Tailwind CSS.
 
 ## 📦 Project Structure
 - `src/` - Source code (components, pages, styles, images)
-- `gatsby-config.js` - Gatsby site configuration
-- `tailwind.config.js` - Tailwind CSS configuration
+- `astro.config.mjs` - Astro site configuration
+- `tailwind.config.mjs` - Tailwind CSS configuration
 - `Dockerfile` - Container build instructions
 - `Jenkinsfile.*` - CI/CD pipeline definitions
 - `sonar-project.properties` - SonarQube configuration
@@ -33,7 +33,7 @@ This is a personal portfolio project built with Gatsby, React, and Tailwind CSS.
 ## 💡 How to Run Locally
 ```shell
 npm install
-gatsby develop
+npm run dev
 ```
 
 ## 🧑‍💻 Author

@@ -1,0 +1,32 @@
+---
+import Layout from "../components/layout.astro"
+import Intro from "../components/intro.astro"
+import Timeline from "../components/timeline.astro"
+import Blog from "../components/blog.astro"
+import Skills from "../components/skills.astro"
+import Projects from "../components/projects.astro"
+import Contact from "../components/contact.astro"
+import NavBar from "../components/navigationbar.astro"
+import Seo from "../components/seo.astro"
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.png" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <Seo title="Harish" />
+  </head>
+  <body>
+    <Layout>
+      <Intro id="intro" />
+      <Timeline id="timeline" />
+      <Blog id="blog" />
+      <Skills id="techskills" />
+      <Projects id="projects" />
+      <Contact />
+      <NavBar />
+    </Layout>
+  </body>
+</html>

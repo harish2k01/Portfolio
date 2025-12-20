@@ -1,0 +1,106 @@
+---
+import "../styles/skills.css"
+import {
+  FaJava,
+  FaPython,
+  FaCss3Alt,
+  FaHtml5,
+  FaBootstrap,
+} from "react-icons/fa6"
+import { SiGrafana, SiTailwindcss, SiRobotframework, SiKubernetes, SiK6, SiPrometheus } from "react-icons/si"
+import { RiGatsbyFill } from "react-icons/ri"
+import { TbApi } from "react-icons/tb"
+import { IoLogoJavascript, IoLogoDocker } from "react-icons/io5"
+import { FaGit, FaGithub, FaJenkins, FaLinux } from "react-icons/fa"
+
+interface Props {
+  id?: string
+}
+
+const { id } = Astro.props as Props
+---
+
+<div>
+  <h2 id={id} class="heading" style="marginBottom: 3rem">
+    Tech & Skills
+  </h2>
+  <div class="grid grid-cols-4 gap-2">
+    <div class="skills-card">
+      <FaPython className="skills-img" />
+      <span>Python</span>
+    </div>
+    <div class="skills-card">
+      <TbApi className="skills-img" />
+      <span style="text-align: center">REST API Automation</span>
+    </div>
+    <div class="skills-card">
+      <SiRobotframework className="skills-img" />
+      <span style="text-align: center">Robot Framework</span>
+    </div>
+    <div class="skills-card">
+      <SiK6 className="skills-img" />
+      <span>K6</span>
+    </div>
+    <div class="skills-card">
+      <SiKubernetes className="skills-img" />
+      <span>Kubernetes</span>
+    </div>
+    <div class="skills-card">
+      <IoLogoDocker className="skills-img" />
+      <span>Docker</span>
+    </div>
+    <div class="skills-card">
+      <FaGit className="skills-img" />
+      <span>Git</span>
+    </div>
+    <div class="skills-card">
+      <FaGithub className="skills-img" />
+      <span>GitHub Actions</span>
+    </div>
+    <div class="skills-card">
+      <FaJenkins className="skills-img" />
+      <span>Jenkins</span>
+    </div>
+    <div class="skills-card">
+      <SiGrafana className="skills-img" />
+      <span>Grafana</span>
+    </div>
+    <div class="skills-card">
+      <SiPrometheus className="skills-img" />
+      <span>Prometheus</span>
+    </div>
+    <div class="skills-card">
+      <FaLinux className="skills-img" />
+      <span>Linux</span>
+    </div>
+    <div class="skills-card">
+      <IoLogoJavascript className="skills-img" />
+      <span>Javascript</span>
+    </div>
+    <div class="skills-card">
+      <FaJava className="skills-img" />
+      <span>Java</span>
+    </div>
+    <div class="skills-card">
+      <FaHtml5 className="skills-img" />
+      <span>HTML</span>
+    </div>
+    <div class="skills-card">
+      <FaCss3Alt className="skills-img" />
+      <span>CSS</span>
+    </div>
+    <div class="skills-card">
+      <FaBootstrap className="skills-img" />
+      <span>Bootstrap</span>
+    </div>
+    <div class="skills-card">
+      <SiTailwindcss className="skills-img" />
+      <span>Tailwind</span>
+    </div>
+    <div class="skills-card">
+      <RiGatsbyFill className="skills-img" />
+      <span>GatsbyJS</span>
+    </div>
+  </div>
+  <hr class="line" style="marginTop: 2.5rem" />
+</div>
