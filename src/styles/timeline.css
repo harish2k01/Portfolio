@@ -54,13 +54,13 @@
   left: 50%;
   transform: translateX(-50%);
   width: 2px;
-  height: 85%;
+  height: 92%;
   @apply bg-neutral-300;
 }
 
 @media (max-width: 521px) {
   .timeline::before {
-    height: 83%;
+    height: 88%;
   }
 }
 
