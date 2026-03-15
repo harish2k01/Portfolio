@@ -6,6 +6,15 @@ interface Props {
 }
 
 const { id } = Astro.props as Props
+
+// Map organization display names to their external URLs.
+const orgLinks: Record<string, string | undefined> = {
+  "Vikaasa School": "https://vikaasa.org/",
+  Vuram: "https://vuram.com",
+  VCET: "https://vcet.ac.in/",
+  Workhall: "https://workhall.com/",
+  NielsenIQ: "https://nielseniq.com",
+}
 ---
 
 <>
@@ -18,7 +27,19 @@ const { id } = Astro.props as Props
             <span class="date">01-Apr-2016</span>
             <p class="text-content">
               Completed 10th, ICSE{" "}
-              <span class="text-gray-400">@Vikaasa School</span>
+              {orgLinks["Vikaasa School"] ? (
+                <a
+                  class="org-link"
+                  href={orgLinks["Vikaasa School"]}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Open Vikaasa School website"
+                >
+                  <span class="text-gray-400">@Vikaasa School</span>
+                </a>
+              ) : (
+                <span class="text-gray-400">@Vikaasa School</span>
+              )}
             </p>
           </div>
         </li>
@@ -28,7 +49,19 @@ const { id } = Astro.props as Props
             <p>
               Completed 12th, ISC
               <br />
-              <span class="text-gray-400">@Vikaasa School</span>
+              {orgLinks["Vikaasa School"] ? (
+                <a
+                  class="org-link"
+                  href={orgLinks["Vikaasa School"]}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Open Vikaasa School website"
+                >
+                  <span class="text-gray-400">@Vikaasa School</span>
+                </a>
+              ) : (
+                <span class="text-gray-400">@Vikaasa School</span>
+              )}
             </p>
           </div>
         </li>
@@ -36,7 +69,19 @@ const { id } = Astro.props as Props
           <div class="timeline-content-left">
             <span class="date">18-Oct-2021</span>
             <p class="text-content">
-              Joined <span class="text-gray-400">@Vuram</span>
+              Joined {orgLinks["Vuram"] ? (
+                <a
+                  class="org-link"
+                  href={orgLinks["Vuram"]}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Open Vuram website"
+                >
+                  <span class="text-gray-400">@Vuram</span>
+                </a>
+              ) : (
+                <span class="text-gray-400">@Vuram</span>
+              )}
               <br />
               as an Intern
             </p>
@@ -48,7 +93,19 @@ const { id } = Astro.props as Props
             <p>
               Graduated BE
               <br />
-              in CSE <span class="text-gray-400">@VCET</span>
+              in CSE {orgLinks["VCET"] ? (
+                <a
+                  class="org-link"
+                  href={orgLinks["VCET"]}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Open VCET website"
+                >
+                  <span class="text-gray-400">@VCET</span>
+                </a>
+              ) : (
+                <span class="text-gray-400">@VCET</span>
+              )}
             </p>
           </div>
         </li>
@@ -58,7 +115,19 @@ const { id } = Astro.props as Props
             <p class="text-content">
               Continued as an
               <br />
-              Intern with <span class="text-gray-400">@Workhall</span>
+              Intern with {orgLinks["Workhall"] ? (
+                <a
+                  class="org-link"
+                  href={orgLinks["Workhall"]}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Open Workhall website"
+                >
+                  <span class="text-gray-400">@Workhall</span>
+                </a>
+              ) : (
+                <span class="text-gray-400">@Workhall</span>
+              )}
             </p>
           </div>
         </li>
@@ -67,7 +136,19 @@ const { id } = Astro.props as Props
             <span class="date">01-Aug-2022</span>
             <p>
               Moved to Full Time{" "}
-              <span class="text-gray-400">@Workhall</span> as Associate
+              {orgLinks["Workhall"] ? (
+                <a
+                  class="org-link"
+                  href={orgLinks["Workhall"]}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Open Workhall website"
+                >
+                  <span class="text-gray-400">@Workhall</span>
+                </a>
+              ) : (
+                <span class="text-gray-400">@Workhall</span>
+              )} as Associate
               Software Engineer
             </p>
           </div>
@@ -78,7 +159,19 @@ const { id } = Astro.props as Props
             <p class="text-content">
               Promoted as an
               <br />
-              Automation Engineer, Quality Enginnering <span class="text-gray-400">@Workhall</span>
+              Automation Engineer, Quality Enginnering {orgLinks["Workhall"] ? (
+                <a
+                  class="org-link"
+                  href={orgLinks["Workhall"]}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Open Workhall website"
+                >
+                  <span class="text-gray-400">@Workhall</span>
+                </a>
+              ) : (
+                <span class="text-gray-400">@Workhall</span>
+              )}
             </p>
           </div>
         </li>
@@ -87,7 +180,19 @@ const { id } = Astro.props as Props
             <span class="date">09-Mar-2026</span>
             <p>
               Moved to {" "}
-              <span class="text-gray-400">@NielsenIQ</span> as
+              {orgLinks["NielsenIQ"] ? (
+                <a
+                  class="org-link"
+                  href={orgLinks["NielsenIQ"]}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Open NielsenIQ website"
+                >
+                  <span class="text-gray-400">@NielsenIQ</span>
+                </a>
+              ) : (
+                <span class="text-gray-400">@NielsenIQ</span>
+              )} as
               <br />
               Site Reliability Engineer
             </p>
