@@ -106,3 +106,15 @@ span,
 p {
   @apply tracking-wide;
 }
+
+/* Styles for organization clickable @text */
+.org-link {
+  cursor: pointer;
+  color: inherit;
+  text-decoration: none;
+}
+
+.org-link:focus {
+  outline: 2px solid rgba(59,130,246,0.25);
+  border-radius: 4px;
+}
