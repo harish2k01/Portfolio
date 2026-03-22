@@ -12,7 +12,7 @@ permissions:
 jobs:
   release-dev:
     name: Dev Deployment Semantic Versioning
-    runs-on: selfhosted
+    runs-on: ubuntu-latest
     outputs:
       version: ${{ steps.semantic.outputs.version }}
       released: ${{ steps.semantic.outputs.released }}
@@ -25,7 +25,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24'
 
       - name: Install semantic-release and plugins
         run: npm install -g semantic-release @semantic-release/github @semantic-release/commit-analyzer @semantic-release/release-notes-generator
@@ -47,15 +47,15 @@ jobs:
           fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GIT_AUTHOR_NAME: harish2k01
-          GIT_AUTHOR_EMAIL: ${{ github.actor }}@users.noreply.github.com
-          GIT_COMMITTER_NAME: harish2k01
-          GIT_COMMITTER_EMAIL: ${{ github.actor }}@users.noreply.github.com
+          GIT_AUTHOR_NAME: github-actions[bot]
+          GIT_AUTHOR_EMAIL: github-actions[bot]@users.noreply.github.com
+          GIT_COMMITTER_NAME: github-actions[bot]
+          GIT_COMMITTER_EMAIL: github-actions[bot]@users.noreply.github.com
 
   trigger-jenkins-dev:
     name: Trigger Jenkins Dev Build
     needs: release-dev
-    runs-on: selfhosted
+    runs-on: ubuntu-latest
     if: needs.release-dev.outputs.released == 'true'
     environment: Dev
     steps:
