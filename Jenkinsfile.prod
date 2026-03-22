@@ -59,6 +59,25 @@ pipeline {
             }
         }
 
+        stage('Trigger Version Update Workflow') {
+            steps {
+                sh '''
+                curl --fail-with-body -X POST \
+                  -H "Authorization: token $GITHUB_CREDENTIALS_PSW" \
+                  -H "Accept: application/vnd.github.v3+json" \
+                  -H "Content-Type: application/json" \
+                  -d '{
+                    "ref": "main",
+                    "inputs": {
+                      "app_name": "portfolio-prod",
+                      "image_tag": "'"$VERSION"'"
+                    }
+                  }' \
+                  https://api.github.com/repos/harish2k01/homelab-ops/actions/workflows/update-version.yaml/dispatches
+                '''
+            }
+        }
+
         stage('Deploy Production Image') {
             steps {
                 script {

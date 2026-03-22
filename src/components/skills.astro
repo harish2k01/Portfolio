@@ -7,7 +7,7 @@ import {
   FaHtml5,
   FaBootstrap,
 } from "react-icons/fa6"
-import { SiGrafana, SiTailwindcss, SiRobotframework, SiKubernetes, SiK6, SiPrometheus, SiHelm } from "react-icons/si"
+import { SiGrafana, SiTailwindcss, SiRobotframework, SiKubernetes, SiK6, SiPrometheus, SiHelm, SiArgo } from "react-icons/si"
 import { RiGatsbyFill } from "react-icons/ri"
 import { TbApi } from "react-icons/tb"
 import { IoLogoJavascript, IoLogoDocker } from "react-icons/io5"
@@ -36,6 +36,10 @@ const { id } = Astro.props as Props
     <div class="skills-card">
       <SiHelm className="skills-img" />
       <span>Helm</span>
+    </div>
+    <div class="skills-card">
+      <SiArgo className="skills-img" />
+      <span>Argo CD</span>
     </div>
     <div class="skills-card">
       <FaGit className="skills-img" />
