@@ -2,6 +2,7 @@ name: Sonarqube Check
 
 permissions:
   contents: read
+
 on:
   pull_request:
     branches:
@@ -19,17 +20,26 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v6.0.2
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
+      - name: Cache SonarQube packages
+        uses: actions/cache@v5.0.4
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
       - name: Sonarqube Scan
-        uses: SonarSource/sonarqube-scan-action@v7.0.0
+        uses: SonarSource/sonarqube-scan-action@v7
         env:
-          SONAR_TOKEN: ${{ env.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ env.SONAR_HOST_URL }}
+          SONAR_SCANNER_OPTS: "-Dsonar.scanner.skipJreProvisioning=true"
 
       - name: Sonarqube Quality Gate
-        uses: SonarSource/sonarqube-quality-gate-action@v1.2.0
-        env:
-          SONAR_TOKEN: ${{ env.SONAR_TOKEN }}
+        uses: SonarSource/sonarqube-quality-gate-action@v1
