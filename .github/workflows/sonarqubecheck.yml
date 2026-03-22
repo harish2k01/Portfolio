@@ -10,24 +10,18 @@ on:
 jobs:
   build:
     name: Sonarqube Scan
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v6.0.2
         with:
           fetch-depth: 0
-      - name: Setup Java
-        uses: actions/setup-java@v5.2.0
-        with:
-          distribution: temurin
-          java-version: 17
       - name: Sonarqube Scan
         uses: SonarSource/sonarqube-scan-action@v7.0.0
         timeout-minutes: 15
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-          SONAR_SCANNER_OPTS: "-Dsonar.scanner.skipJreProvisioning=true"
         with:
           args: -X
       - name: Sonarqube Quality Gate
