@@ -18,6 +18,7 @@ jobs:
           fetch-depth: 0
       - name: Sonarqube Scan
         uses: SonarSource/sonarqube-scan-action@v6
+        timeout-minutes: 15
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
