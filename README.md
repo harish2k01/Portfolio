@@ -1,43 +1,85 @@
-# Portfolio Project
+# 🚀 Portfolio Platform
 
-This is a personal portfolio project built with Astro, React, and Tailwind CSS. It is designed to showcase my development and DevOps skills, including CI/CD, containerization, and code quality practices.
-
-## 🚀 Features
-- Modern responsive design using Tailwind CSS
-- Custom components for blog, contact, projects, skills, and timeline
-- Integrated CI/CD pipelines (Jenkins)
-- Docker support for containerized deployment
-- Code quality analysis with SonarQube
-
-## 🛠️ Workflow
-1. **Development**
-   - Edit source files in `src/` for pages, components, and styles.
-   - Use `npm run dev` to run the site locally.
-2. **CI/CD**
-   - Jenkins pipelines (`Jenkinsfile.dev`, `Jenkinsfile.prod`) automate build, test, and deployment.
-   - SonarQube analyzes code quality and security.
-3. **Containerization**
-   - Dockerfile enables building and running the app in containers.
-4. **Deployment**
-   - Deploy to cloud or on-prem using Docker or CI/CD pipelines.
-
-## 📦 Project Structure
-- `src/` - Source code (components, pages, styles, images)
-- `astro.config.mjs` - Astro site configuration
-- `tailwind.config.mjs` - Tailwind CSS configuration
-- `Dockerfile` - Container build instructions
-- `Jenkinsfile.*` - CI/CD pipeline definitions
-- `sonar-project.properties` - SonarQube configuration
-- `package.json` - Project dependencies
-
-## 💡 How to Run Locally
-```shell
-npm install
-npm run dev
-```
-
-## 🧑‍💻 Author
-This project is maintained by Harish T.
+This is my personal portfolio project, built not just to showcase my work, but to demonstrate production-style DevOps practices including CI/CD, release workflows, and containerized deployments.
 
 ---
+
+## 🎯 Overview
+
+The application is built using modern frontend technologies and deployed through an automated pipeline.  
+This project focuses on how software is delivered, not just how it is built.
+
+---
+
+## ⚙️ Key Capabilities
+
+- Responsive frontend built with Astro, React, and Tailwind CSS  
+- Containerized application using Docker for consistent deployments  
+- Automated CI/CD pipelines using GitHub Actions & Jenkins  
+- Code quality and security checks via SonarQube  
+- Separate pipelines for development and production environments  
+
+---
+
+## 🚀 Release & Deployment Workflow
+
+This project implements a structured release workflow instead of a basic CI/CD setup:
+
+- Semantic Versioning using semantic-release for automated versioning and changelog generation
+- Automated build and Docker image creation  
+- Image tagging aligned with application versions  
+- Images pushed to GitHub Container Registry (GHCR)  
+- Environment-specific deployments (development and production)  
+- Code quality checks enforced before deployment  
+
+**Flow:**
+
+Code Push → Version Bump → Build → Quality Check → Docker Image → Registry → Deploy
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend:** Astro, React, Tailwind CSS  
+- **CI/CD:** GitHub Actions, Jenkins  
+- **Containerization:** Docker  
+- **Registry:** GitHub Container Registry (GHCR)  
+- **Code Quality:** SonarQube  
+
+---
+
+## 📦 Project Structure
+
+- `src/` – Application source code  
+- `Dockerfile` – Container build instructions  
+- `Jenkinsfile.dev` – Development pipeline  
+- `Jenkinsfile.prod` – Production pipeline  
+- `sonar-project.properties` – Code analysis configuration  
+
+---
+
+## 💡 Running Locally
+
+npm install  
+npm run dev  
+
+---
+
+## 🧠 Why This Project
+
+This project acts as both my portfolio and a hands-on environment to experiment with:
+
+- CI/CD pipeline design  
+- Release workflows and semantic versioning  
+- Deployment strategies  
+- Code quality enforcement  
+
+---
+
+## 🧑‍💻 Author
+
+Harish T
+
+---
+
 *This project is for demonstration purposes only and does not include a license file.*
