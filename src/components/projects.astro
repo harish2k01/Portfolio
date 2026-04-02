@@ -11,7 +11,7 @@ const { id } = Astro.props as Props
 
 <>
   <h2 id={id} class="heading" style={{ marginBottom: "3rem" }}>
-    Hobby Projects
+    Projects
   </h2>
   <div class="grid grid-cols-2 gap-4">
     <a href="https://github.com/harish2k01/Portfolio" target="_blank">
@@ -20,7 +20,18 @@ const { id } = Astro.props as Props
         <div class="project-card-content">
           <h3 class="project-card-head">Portfolio Website</h3>
           <p class="text-gray-400">
-            A Simple Personal Portfolio Website
+            My Portfolio Website with CI/CD using GitHub Actions, Jenkins, Sonarqube Checks on PR and others
+          </p>
+        </div>
+      </div>
+    </a>
+    <a href="https://github.com/harish2k01/homelab-ops" target="_blank">
+      <div class="projects-card">
+        <FaArrowRight className="project-img" client:load />
+        <div class="project-card-content">
+          <h3 class="project-card-head">GitOps Kubernetes Management</h3>
+          <p class="text-gray-400">
+            GitOps-based setup to manage my Kubernetes homelab using Argo CD as the deployment engine
           </p>
         </div>
       </div>
