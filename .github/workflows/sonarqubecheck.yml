@@ -12,7 +12,7 @@ on:
 jobs:
   build:
     name: Sonarqube Scan
-    runs-on: self-hosted
+    runs-on: portfolio-runner
 
     env:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
