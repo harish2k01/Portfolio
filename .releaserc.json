@@ -1,5 +1,4 @@
 {
-  "repositoryUrl": "https://github.com/harish2k01/Portfolio.git",
   "branches": [
     "main",
     {
@@ -18,6 +17,12 @@
         "failComment": false,
         "labels": false,
         "releasedLabels": false
+      }
+    ],
+    [
+      "@semantic-release/exec",
+      {
+        "successCmd": "echo version=${nextRelease.version} >> $GITHUB_OUTPUT && echo released=true >> $GITHUB_OUTPUT"
       }
     ]
   ]
