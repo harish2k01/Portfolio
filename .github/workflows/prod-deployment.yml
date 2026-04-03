@@ -13,7 +13,7 @@ permissions:
 jobs:
   release-prod:
     name: Prod Deployment Semantic Versioning
-    runs-on: ubuntu-latest
+    runs-on: portfolio-runner
     outputs:
       version: ${{ steps.semantic.outputs.version }}
       released: ${{ steps.semantic.outputs.released }}
@@ -46,7 +46,7 @@ jobs:
   build-and-publish-prod:
     name: Build and Publish Prod Image
     needs: release-prod
-    runs-on: ubuntu-latest
+    runs-on: portfolio-runner
     if: needs.release-prod.outputs.released == 'true'
     environment: Production
 
@@ -102,7 +102,7 @@ jobs:
       - release-prod
       - build-and-publish-prod
       - update-homelab-ops-prod
-    runs-on: ubuntu-latest
+    runs-on: portfolio-runner
     if: needs.release-prod.outputs.released == 'true'
     environment: Production
 
