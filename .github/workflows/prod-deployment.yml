@@ -7,6 +7,7 @@ on:
 permissions:
   contents: write
   issues: write
+  packages: write
   pull-requests: write
 
 jobs:
@@ -42,9 +43,63 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  trigger-jenkins-prod:
-    name: Trigger Jenkins Prod Build
+  build-and-publish-prod:
+    name: Build and Publish Prod Image
     needs: release-prod
+    runs-on: ubuntu-latest
+    if: needs.release-prod.outputs.released == 'true'
+    environment: Production
+
+    steps:
+      - name: Checkout release tag
+        uses: actions/checkout@v6.0.2
+        with:
+          fetch-depth: 0
+          ref: v${{ needs.release-prod.outputs.version }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: |
+            ghcr.io/harish2k01/portfolio:${{ needs.release-prod.outputs.version }}
+            ghcr.io/harish2k01/portfolio:latest
+          labels: |
+            org.opencontainers.image.source=https://github.com/harish2k01/Portfolio
+            org.opencontainers.image.description=Portfolio
+            org.opencontainers.image.licenses=MIT
+
+  update-homelab-ops-prod:
+    name: Update homelab-ops Prod Version
+    needs:
+      - release-prod
+      - build-and-publish-prod
+    if: needs.release-prod.outputs.released == 'true'
+    uses: harish2k01/homelab-ops/.github/workflows/update-version.yaml@main
+    with:
+      app_name: portfolio-prod
+      image_tag: ${{ needs.release-prod.outputs.version }}
+    secrets:
+      GH_APP_ID: ${{ secrets.GH_APP_ID }}
+      GH_APP_PRIVATE_KEY: ${{ secrets.GH_APP_PRIVATE_KEY }}
+
+  trigger-jenkins-prod:
+    name: Trigger Jenkins Prod Deploy
+    needs:
+      - release-prod
+      - build-and-publish-prod
+      - update-homelab-ops-prod
     runs-on: ubuntu-latest
     if: needs.release-prod.outputs.released == 'true'
     environment: Production
@@ -55,5 +110,42 @@ jobs:
           curl -X POST "${{ secrets.JENKINS_URL }}/job/${{ secrets.JENKINS_JOB_PROD }}/buildWithParameters" \
             --user "${{ secrets.JENKINS_USER }}:${{ secrets.JENKINS_TOKEN }}" \
             --data-urlencode "VERSION=${{ needs.release-prod.outputs.version }}" \
-            --data-urlencode "GITHUB_SHA=${{ github.sha }}" \
             --data-urlencode "SERVER_URL=${{ secrets.SERVER_URL }}"
+
+  sync-main-to-dev:
+    name: Sync main → dev (direct merge)
+    needs:
+      - release-prod
+      - build-and-publish-prod
+      - update-homelab-ops-prod
+    runs-on: ubuntu-latest
+    if: needs.release-prod.outputs.released == 'true'
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v6.0.2
+        with:
+          fetch-depth: 0
+
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Merge main into dev
+        run: |
+          git fetch origin
+          git checkout dev
+          git pull origin dev
+
+          # Skip if already up-to-date
+          if git merge-base --is-ancestor origin/main HEAD; then
+            echo "Dev already up-to-date with main"
+            exit 0
+          fi
+
+          git merge origin/main --no-edit
+
+      - name: Push changes
+        run: |
+          git push origin dev
