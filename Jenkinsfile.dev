@@ -3,7 +3,6 @@ pipeline {
 
     parameters {
         string(name: 'VERSION', defaultValue: '', description: 'Semantic version like 1.2.3-beta.0')
-        string(name: 'GITHUB_SHA', defaultValue: '', description: 'GitHub commit SHA')
         string(name: 'SERVER_URL', defaultValue: '', description: 'URL of the server')
     }
 
@@ -22,59 +21,6 @@ pipeline {
                         error('VERSION must be a valid pre-release like 1.2.3-beta.0')
                     }
                 }
-            }
-        }
-
-        stage('Checkout Code') {
-            steps {
-                sh '''
-                git remote set-url origin https://${GITHUB_CREDENTIALS_USR}:${GITHUB_CREDENTIALS_PSW}@github.com/harish2k01/Portfolio.git
-                git fetch --tags
-                git checkout v${VERSION}
-                '''
-            }
-        }
-
-        stage('Build Docker Image') {
-            steps {
-                sh '''
-                docker build \
-                    --label "org.opencontainers.image.source=https://github.com/harish2k01/Portfolio" \
-                    --label "org.opencontainers.image.description=Portfolio" \
-                    --label "org.opencontainers.image.licenses=MIT" \
-                    -t $IMAGE_NAME:$VERSION .
-                docker tag $IMAGE_NAME:$VERSION $IMAGE_NAME:dev
-                '''
-            }
-        }
-
-        stage('Push to GHCR') {
-            steps {
-                sh '''
-                echo "$GITHUB_CREDENTIALS_PSW" | docker login ghcr.io -u "$GITHUB_CREDENTIALS_USR" --password-stdin
-                docker push $IMAGE_NAME:$VERSION
-                docker push $IMAGE_NAME:dev
-                docker logout
-                '''
-            }
-        }
-
-        stage('Trigger Version Update Workflow') {
-            steps {
-                sh '''
-                curl --fail-with-body -X POST \
-                  -H "Authorization: token $GITHUB_CREDENTIALS_PSW" \
-                  -H "Accept: application/vnd.github.v3+json" \
-                  -H "Content-Type: application/json" \
-                  -d '{
-                    "ref": "main",
-                    "inputs": {
-                      "app_name": "portfolio-dev",
-                      "image_tag": "'"$VERSION"'"
-                    }
-                  }' \
-                  https://api.github.com/repos/harish2k01/homelab-ops/actions/workflows/update-version.yaml/dispatches
-                '''
             }
         }
 
