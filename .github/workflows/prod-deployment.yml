@@ -104,7 +104,7 @@ jobs:
       - build-and-publish-prod
       - update-homelab-ops-prod
     runs-on: portfolio-runner
-    if: needs.release-prod.outputs.released == 'true'
+    if: false
     environment: Production
 
     steps:
