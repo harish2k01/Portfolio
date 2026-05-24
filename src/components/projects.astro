@@ -7,6 +7,48 @@ interface Props {
 }
 
 const { id } = Astro.props as Props
+
+const projects = [
+  {
+    href: "https://github.com/harish2k01/Portfolio",
+    title: "Portfolio Website",
+    description:
+      "My Portfolio Website with CI/CD using GitHub Actions, Jenkins, Sonarqube Checks on PR and others",
+  },
+  {
+    href: "https://github.com/harish2k01/homelab-ops",
+    title: "GitOps Kubernetes Management",
+    description:
+      "GitOps-based setup to manage my Kubernetes homelab using Argo CD as the deployment engine",
+  },
+  {
+    href: "https://github.com/harish2k01/helm-charts",
+    title: "Kubernetes Helm Charts Library",
+    description:
+      "Versioned Helm charts for self-hosted Kubernetes apps, published through GitHub Pages and GHCR OCI releases",
+  },
+  {
+    href: "https://github.com/harish2k01/k8s-debug-pod",
+    title: "Kubernetes Debug Pod",
+    description:
+      "Ubuntu-based Kubernetes troubleshooting image with common network, process, database, and cluster debugging tools",
+  },
+  {
+    href: "https://github.com/harish2k01/Tic-Tac-Toe",
+    title: "Tic Tac Toe",
+    description: "An Android App to play the classic X or O game with 2 players",
+  },
+  {
+    href: "https://github.com/harish2k01/Hospital-Management-System-Flask",
+    title: "Hospital Management System",
+    description: "A basic & simple Hospital Management System Web App",
+  },
+  {
+    href: "https://github.com/harish2k01/Smart-Switch",
+    title: "Smart Switch",
+    description: "Home Automation based project using IoT & Raspberry Pi",
+  },
+]
 ---
 
 <>
@@ -14,64 +56,19 @@ const { id } = Astro.props as Props
     Projects
   </h2>
   <div class="grid grid-cols-2 gap-4">
-    <a href="https://github.com/harish2k01/Portfolio" target="_blank">
-      <div class="projects-card">
-        <FaArrowRight className="project-img" client:load />
-        <div class="project-card-content">
-          <h3 class="project-card-head">Portfolio Website</h3>
-          <p class="text-gray-400">
-            My Portfolio Website with CI/CD using GitHub Actions, Jenkins, Sonarqube Checks on PR and others
-          </p>
-        </div>
-      </div>
-    </a>
-    <a href="https://github.com/harish2k01/homelab-ops" target="_blank">
-      <div class="projects-card">
-        <FaArrowRight className="project-img" client:load />
-        <div class="project-card-content">
-          <h3 class="project-card-head">GitOps Kubernetes Management</h3>
-          <p class="text-gray-400">
-            GitOps-based setup to manage my Kubernetes homelab using Argo CD as the deployment engine
-          </p>
-        </div>
-      </div>
-    </a>
-    <a href="https://github.com/harish2k01/Tic-Tac-Toe" target="_blank">
-      <div class="projects-card">
-        <FaArrowRight className="project-img" client:load />
-        <div class="project-card-content">
-          <h3 class="project-card-head">Tic Tac Toe</h3>
-          <p class="text-gray-400">
-            An Android App to play the classic X or O game with 2 players
-          </p>
-        </div>
-      </div>
-    </a>
-    <a
-      href="https://github.com/harish2k01/Hospital-Management-System-Flask"
-      target="_blank"
-    >
-      <div class="projects-card">
-        <FaArrowRight className="project-img" client:load />
-        <div class="project-card-content">
-          <h3 class="project-card-head">Hospital Management System</h3>
-          <p class="text-gray-400">
-            A basic & simple Hospital Management System Web App
-          </p>
-        </div>
-      </div>
-    </a>
-    <a href="https://github.com/harish2k01/Smart-Switch" target="_blank">
-      <div class="projects-card">
-        <FaArrowRight className="project-img" client:load />
-        <div class="project-card-content">
-          <h3 class="project-card-head">Smart Switch</h3>
-          <p class="text-gray-400">
-            Home Automation based project using IoT & Raspberry Pi
-          </p>
-        </div>
-      </div>
-    </a>
+    {
+      projects.map((project) => (
+        <a href={project.href} target="_blank" rel="noreferrer">
+          <div class="projects-card">
+            <FaArrowRight className="project-img" client:load />
+            <div class="project-card-content">
+              <h3 class="project-card-head">{project.title}</h3>
+              <p class="text-gray-400">{project.description}</p>
+            </div>
+          </div>
+        </a>
+      ))
+    }
   </div>
   <hr class="line" style={{ marginTop: "2.5rem" }} />
 </>
