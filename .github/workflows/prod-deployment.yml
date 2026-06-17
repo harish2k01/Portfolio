@@ -96,21 +96,3 @@ jobs:
     secrets:
       GH_APP_ID: ${{ secrets.GH_APP_ID }}
       GH_APP_PRIVATE_KEY: ${{ secrets.GH_APP_PRIVATE_KEY }}
-
-  trigger-jenkins-prod:
-    name: Trigger Jenkins Prod Deploy
-    needs:
-      - release-prod
-      - build-and-publish-prod
-      - update-homelab-ops-prod
-    runs-on: portfolio-runner
-    if: false
-    environment: Production
-
-    steps:
-      - name: Trigger Jenkins Prod Job
-        run: |
-          curl -X POST "${{ secrets.JENKINS_URL }}/job/${{ secrets.JENKINS_JOB_PROD }}/buildWithParameters" \
-            --user "${{ secrets.JENKINS_USER }}:${{ secrets.JENKINS_TOKEN }}" \
-            --data-urlencode "VERSION=${{ needs.release-prod.outputs.version }}" \
-            --data-urlencode "SERVER_URL=${{ secrets.SERVER_URL }}"
