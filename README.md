@@ -15,7 +15,7 @@ This project focuses on how software is delivered, not just how it is built.
 
 - Responsive frontend built with Astro, React, and Tailwind CSS  
 - Containerized application using Docker for consistent deployments  
-- Automated CI/CD pipelines using GitHub Actions & Jenkins  
+- Automated CI/CD pipelines using GitHub Actions  
 - Code quality and security checks via SonarQube  
 - Separate pipelines for development and production environments  
 
@@ -41,7 +41,7 @@ Code Push → Version Bump → Build → Quality Check → Docker Image → Regi
 ## 🛠️ Tech Stack
 
 - **Frontend:** Astro, React, Tailwind CSS  
-- **CI/CD:** GitHub Actions, Jenkins  
+- **CI/CD:** GitHub Actions  
 - **Containerization:** Docker  
 - **Registry:** GitHub Container Registry (GHCR)  
 - **Code Quality:** SonarQube  
@@ -52,8 +52,6 @@ Code Push → Version Bump → Build → Quality Check → Docker Image → Regi
 
 - `src/` – Application source code  
 - `Dockerfile` – Container build instructions  
-- `Jenkinsfile.dev` – Development pipeline  
-- `Jenkinsfile.prod` – Production pipeline  
 - `sonar-project.properties` – Code analysis configuration  
 
 ---

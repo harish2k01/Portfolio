@@ -96,21 +96,3 @@ jobs:
     secrets:
       GH_APP_ID: ${{ secrets.GH_APP_ID }}
       GH_APP_PRIVATE_KEY: ${{ secrets.GH_APP_PRIVATE_KEY }}
-
-  trigger-jenkins-dev:
-    name: Trigger Jenkins Dev Deploy
-    needs:
-      - release-dev
-      - build-and-publish-dev
-      - update-homelab-ops-dev
-    runs-on: portfolio-runner
-    if: false
-    environment: Dev
-
-    steps:
-      - name: Trigger Jenkins Dev Job
-        run: |
-          curl -X POST "${{ secrets.JENKINS_URL }}/job/${{ secrets.JENKINS_JOB_DEV }}/buildWithParameters" \
-            --user "${{ secrets.JENKINS_USER }}:${{ secrets.JENKINS_TOKEN }}" \
-            --data-urlencode "VERSION=${{ needs.release-dev.outputs.version }}" \
-            --data-urlencode "SERVER_URL=${{ secrets.SERVER_URL }}"
