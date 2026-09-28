@@ -1,5 +1,9 @@
 # 🚀 Portfolio Platform
 
+This is the legacy portfolio, retained at **https://v1.harish2k01.xyz**. The current portfolio lives in [portfolio-next](https://github.com/harish2k01/portfolio-next) at **https://harish2k01.xyz**.
+
+The production workflow continues to publish `ghcr.io/harish2k01/portfolio` and update `charts/portfolio-prod` in `homelab-ops`. Resource names stay unchanged. See the [cutover guide](https://github.com/harish2k01/portfolio-next/blob/main/DEPLOYMENT.md) for DNS/tunnel routing and TLS setup.
+
 This is my personal portfolio project, built not just to showcase my work, but to demonstrate production-style DevOps practices including CI/CD, release workflows, and containerized deployments.
 
 ---
