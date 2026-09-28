@@ -10,5 +10,5 @@ export default defineConfig({
       external: ['tailwindcss'],
     },
   },
-  site: "https://harish2k01.xyz"
+  site: "https://v1.harish2k01.xyz"
 });

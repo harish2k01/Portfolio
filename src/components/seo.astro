@@ -6,11 +6,14 @@ interface Props {
 
 const { title, description = "Harish's Portfolio Website" } = Astro.props as Props
 const siteTitle = "Harish"
+const canonical = new URL(Astro.url.pathname, Astro.site)
 ---
 
 <>
   <title>{title} | {siteTitle}</title>
   <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+  <meta property="og:url" content={canonical} />
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
   <meta property="og:type" content="website" />
